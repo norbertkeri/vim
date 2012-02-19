@@ -9,11 +9,11 @@ runtime configs/functions.vimrc
 runtime configs/plugins.vimrc
 
 if has("gui_running")
-    source ~/vault/Dropbox/Programming/vim/config/gui.vimrc
+    runtime configs/gui.vimrc
 end
 
 if has("win32") || has("win64")
-    source ~/vault/Dropbox/Programming/vim/config/windows.vimrc
+    runtime configs/windows.vimrc
 else
-    source ~/vault/Dropbox/Programming/vim/config/linux.vimrc
+    runtime configs/linux.vimrc
 end

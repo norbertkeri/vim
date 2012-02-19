@@ -17,7 +17,6 @@ set smartcase
 set laststatus=2
 set modeline
 set background=dark
-set statusline=%<[%02n]\ %F%(\ %m%h%w%y%r%)\ %a%=\ %8l,%c%V/%L\ (%P)\ [%02B]
 set visualbell
 set noerrorbells
 set backspace=indent,eol,start

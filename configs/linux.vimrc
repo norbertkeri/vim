@@ -1,2 +1,2 @@
-set directory=/tmp
-set backupdir=/tmp
+set directory=~/.vim/swap
+set backupdir=~/.vim/backup

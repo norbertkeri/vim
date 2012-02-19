@@ -1,6 +1,6 @@
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 let g:syntastic_enable_signs=1
 
 au BufRead,BufNewFile *.twig set syntax=htmljinja

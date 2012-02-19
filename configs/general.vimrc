@@ -25,3 +25,4 @@ set encoding=utf-8
 set showcmd
 set showmatch
 set hidden
+colors molokai

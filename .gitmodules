@@ -54,13 +54,6 @@
 	path = bundle/zencoding
 	url = https://github.com/mattn/zencoding-vim.git
     ignore = dirty
-[submodule "bundle/vcscommand"]
-	path = bundle/vcscommand
-	url = https://github.com/vim-scripts/vcscommand.vim.git
-    ignore = dirty
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule "bundle/showmarks"]
-	path = bundle/showmarks
-	url = https://github.com/vim-scripts/ShowMarks.git

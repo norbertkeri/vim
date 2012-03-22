@@ -25,4 +25,7 @@ map <leader>fF :ClearCtrlPCache<cr>:CtrlP<cr>
 map <leader>fb :CtrlPBuffer<cr>
 map <leader>fm :CtrlPMRUFiles<cr>
 
+" YankRing
+map <leader>y :YRShow<cr>
+
 let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.'`^<>[]{}()\""

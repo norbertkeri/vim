@@ -46,10 +46,6 @@
 	path = bundle/threesome
 	url = https://github.com/sjl/threesome.vim.git
     ignore = dirty
-[submodule "bundle/showmarks"]
-	path = bundle/showmarks
-	url = https://github.com/garbas/vim-showmarks.git
-    ignore = dirty
 [submodule "bundle/yankring"]
 	path = bundle/yankring
 	url = https://github.com/vim-scripts/YankRing.vim.git

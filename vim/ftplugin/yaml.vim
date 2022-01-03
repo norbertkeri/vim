@@ -1,4 +1,7 @@
-setlocal ts=2 sts=2 sw=2 foldlevel=5 expandtab foldmethod=indent
+setlocal ts=2 sts=2 sw=2 foldlevel=5
+setlocal expandtab 
+setlocal foldmethod=indent
+setlocal indentkeys-=0#
 
 function! GoToNextIndent(inc)
     " Get the cursor current position

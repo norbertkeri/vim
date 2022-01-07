@@ -21,12 +21,12 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 "nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
-nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> ge    <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+"nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> ge    <cmd>lua vim.diagnostic.open_float()<CR>
 
 set updatetime=300
 " Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics{focusable=false}
+autocmd CursorHold * lua vim.diagnostic.open_float{focusable=false}
 
 " Goto previous/next diagnostic warning/error
 nnoremap <silent> <leader>j <cmd>lua vim.lsp.diagnostic.goto_next()<CR>

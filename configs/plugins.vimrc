@@ -41,7 +41,7 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'MunifTanjim/nui.nvim'
-Plug 'ggandor/lightspeed.nvim'
+Plug 'ggandor/leap.nvim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

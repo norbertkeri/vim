@@ -1,5 +1,6 @@
-.netrwhist
-swap/*
-configs/local.vimrc
+vim/.netrwhist
+vim/swap/*
+vim/configs/local.vimrc
+vim/undodir/*
+vim/backup
 plugged/*
-undodir/*

@@ -9,7 +9,9 @@ runtime configs/mappings.vimrc
 runtime configs/functions.vimrc
 "runtime configs/coc.vimrc
 runtime configs/lsp.vimrc
-
+if get(g:, "is_colemak", 0)
+    runtime configs/colemak.vim
+end
 
 if has("gui_running")
     runtime configs/gui.vimrc

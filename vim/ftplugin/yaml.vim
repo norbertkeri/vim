@@ -1,6 +1,6 @@
-setlocal ts=2 sts=2 sw=2 foldlevel=5
+setlocal ts=2 sts=2 sw=2
 setlocal expandtab 
-setlocal foldmethod=indent
+setlocal nofoldenable
 setlocal indentkeys-=0#
 
 function! GoToNextIndent(inc)

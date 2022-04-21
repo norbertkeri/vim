@@ -56,7 +56,7 @@ require("neo-tree").setup({
         ["s"] = "open_split",
         ["v"] = "open_vsplit",
         ["K"] = "close_node",
-        ["u"] = "navigate_up",
+        ["-"] = "navigate_up",
         ["."] = "set_root",
         ["H"] = "toggle_hidden",
         ["R"] = "refresh",
@@ -122,5 +122,5 @@ require("neo-tree").setup({
         }
     }
 })
-vim.cmd([[nnoremap - :Neotree toggle float<cr>]])
-vim.cmd([[nnoremap _ :Neotree toggle current reveal reveal_force_cwd<cr>]])
+--vim.cmd([[nnoremap - :Neotree toggle float<cr>]])
+vim.cmd([[nnoremap - :Neotree toggle float reveal reveal_force_cwd<cr>]])

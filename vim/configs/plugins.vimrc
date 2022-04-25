@@ -17,7 +17,6 @@ Plug 'wellle/targets.vim'
 Plug 'ryvnf/readline.vim'
 Plug 'chr4/nginx.vim'
 Plug 'rust-lang/rust.vim'
-"Plug 'dag/vim-fish'
 Plug 'hhsnopek/vim-sugarss'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'norcalli/nvim-colorizer.lua'

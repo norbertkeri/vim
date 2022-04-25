@@ -103,3 +103,4 @@ local modname = ...
 require(modname .. '.lsp')
 require(modname .. '.neotree')
 require(modname .. '.toggleterm')
+require(modname .. '.lualine')

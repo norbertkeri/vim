@@ -5,7 +5,6 @@ Plug 'tpope/vim-repeat'
 Plug 'sjl/splice.vim'
 Plug 'christoomey/vim-conflicted' "TODO
 Plug 'pangloss/vim-javascript'
-Plug 'bling/vim-airline'
 Plug 'tpope/vim-eunuch'
 Plug 'dyng/ctrlsf.vim'
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
@@ -42,6 +41,7 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'ggandor/leap.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

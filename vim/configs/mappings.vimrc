@@ -35,7 +35,6 @@ nnoremap zz yyp^i//<esc>j
 
 nnoremap <tab> :tabnext<cr>
 nnoremap <S-tab> :tabprev<cr>
-nnoremap <C-u> <C-i>
 
 nmap <C-t> :tabnew<cr>
 nmap - :Explore<cr>

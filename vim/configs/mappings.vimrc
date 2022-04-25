@@ -24,8 +24,9 @@ nmap <leader>f :Telescope find_files<cr>
 nmap <leader>b :Telescope buffers<cr>
 nmap <leader>m :Telescope oldfiles<cr>
 
-nmap <F2> :tabnew ~/.vim/configs/plugins.vimrc<cr>
-nmap <F3> :tabnew ~/.vim/configs/local.vimrc<cr>
+nmap <F2> :tabnew ~/.vimrepository/vim/configs/plugins.vimrc<cr>
+nmap <F3> :tabnew ~/.vimrepository/vim/configs/local.vimrc<cr>
+nmap <F4> :tabnew ~/.vimrepository/nvim/init.vim<cr>
 
 nmap <leader>F <Plug>CtrlSFPrompt
 nmap ! <Plug>CtrlSFCwordExec

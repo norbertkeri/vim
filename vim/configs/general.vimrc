@@ -89,7 +89,7 @@ endfun
 autocmd BufWritePre,FileWritePre * :call <SID>AutoMakeDirectory()
 
 " Persistent undo
-let vimDir = '$HOME/.vim'
+let vimDir = '$HOME/.vimrepository/vim'
 let &runtimepath.=','.vimDir
 
 if has('persistent_undo')

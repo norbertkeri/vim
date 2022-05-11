@@ -41,6 +41,7 @@ Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'ggandor/leap.nvim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'jedrzejboczar/toggletasks.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 " Colors

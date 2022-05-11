@@ -36,7 +36,8 @@ set signcolumn=yes
 
 let g:completion_enable_auto_paren = 1
 
-map ga :Telescope lsp_code_actions theme=get_dropdown<cr>
+map ga :lua vim.lsp.buf.code_action()<cr>
+
 map <leader>s :Telescope lsp_workspace_symbols<cr>
 map <leader>e :Telescope diagnostics theme=get_dropdown<cr>
 map <leader>d :Telescope lsp_definitions<cr>

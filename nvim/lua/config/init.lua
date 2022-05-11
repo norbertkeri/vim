@@ -28,9 +28,17 @@ require('telescope').setup{
         ["<esc>"] = actions.close
       },
     },
+  },
+  extensions = {
+      ["ui-select"] = {
+          require("telescope.themes").get_dropdown {
+              -- even more opts
+          }
+      }
   }
 }
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('ui-select')
 
 require'colorizer'.setup()
 require('gitsigns').setup()

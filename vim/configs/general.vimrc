@@ -150,3 +150,6 @@ let g:mergetool_prefer_revision = 'local'
 let g:sneak#s_next = 1
 
 let g:mergetool_layout = 'mr,b'
+
+let g:do_filetype_lua = 1
+let g:did_load_filetypes = 0

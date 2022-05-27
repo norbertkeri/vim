@@ -25,8 +25,6 @@ nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> ge    <cmd>lua vim.diagnostic.open_float()<CR>
 
 set updatetime=300
-" Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.diagnostic.open_float{focusable=false}
 
 " Goto previous/next diagnostic warning/error
 nnoremap <silent> <leader>j <cmd>lua vim.lsp.diagnostic.goto_next()<CR>

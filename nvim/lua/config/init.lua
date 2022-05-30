@@ -113,3 +113,5 @@ require(modname .. '.neotree')
 require(modname .. '.toggleterm')
 require(modname .. '.lualine')
 require(modname .. '.toggletasks')
+
+require "crates".setup()

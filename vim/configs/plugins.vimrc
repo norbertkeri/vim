@@ -43,6 +43,7 @@ Plug 'ggandor/leap.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'jedrzejboczar/toggletasks.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'saecki/crates.nvim', { 'tag': 'v0.2.1' }
 
 " Colors
 Plug 'challenger-deep-theme/vim'

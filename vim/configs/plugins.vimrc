@@ -2,7 +2,6 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'sjl/splice.vim'
 Plug 'christoomey/vim-conflicted' "TODO
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-eunuch'
@@ -44,6 +43,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'jedrzejboczar/toggletasks.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'saecki/crates.nvim', { 'tag': 'v0.2.1' }
+Plug 'rhysd/clever-f.vim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'
@@ -56,6 +56,8 @@ Plug 'folke/tokyonight.nvim'
 Plug 'catppuccin/nvim'
 Plug 'devnnys/spaceodyssey.nvim'
 Plug 'rebelot/kanagawa.nvim'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'spywhere/detect-language.nvim'
 
 " CoC
 "Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}

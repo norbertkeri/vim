@@ -115,3 +115,4 @@ require(modname .. '.lualine')
 require(modname .. '.toggletasks')
 
 require "crates".setup()
+require "detect-language".setup()

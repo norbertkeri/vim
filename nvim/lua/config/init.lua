@@ -106,6 +106,15 @@ if vim.env.TERM == 'xterm-kitty' then
   vim.cmd([[autocmd UILeave * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[<1u") | endif]])
 end
 
+local null_ls = require("null-ls")
+
+null_ls.setup {
+  sources = {
+    null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.completion.spell,
+  }
+}
+
 require "lsp_signature".setup()
 local modname = ...
 require(modname .. '.lsp')

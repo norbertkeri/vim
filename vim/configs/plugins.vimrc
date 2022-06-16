@@ -44,6 +44,7 @@ Plug 'jedrzejboczar/toggletasks.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'saecki/crates.nvim', { 'tag': 'v0.2.1' }
 Plug 'rhysd/clever-f.vim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

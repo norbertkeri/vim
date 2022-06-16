@@ -32,6 +32,8 @@ set nobackup
 set autoread
 set history=1000
 
+set nofoldenable
+
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
   if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
@@ -153,3 +155,11 @@ let g:mergetool_layout = 'mr,b'
 
 let g:do_filetype_lua = 1
 let g:did_load_filetypes = 0
+
+function! s:setupConflicted()
+    set stl+=%{ConflictedVersion()}
+    " Resolve and move to next conflicted file.
+    nnoremap <space><space> :GitNextConflict<cr>
+    set nofoldenable
+endfunction
+autocmd User VimConflicted call s:setupConflicted()

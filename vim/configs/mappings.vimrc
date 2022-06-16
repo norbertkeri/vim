@@ -26,7 +26,7 @@ nmap <leader>m :Telescope oldfiles<cr>
 
 nmap <F2> :tabnew ~/.vimrepository/vim/configs/plugins.vimrc<cr>
 nmap <F3> :tabnew ~/.vimrepository/vim/configs/local.vimrc<cr>
-nmap <F4> :tabnew ~/.vimrepository/nvim/init.vim<cr>
+nmap <F4> :tabnew ~/.vimrepository/nvim/lua/config/init.lua<cr>
 
 nmap <leader>F <Plug>CtrlSFPrompt
 nmap ! <Plug>CtrlSFCwordExec

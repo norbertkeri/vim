@@ -44,7 +44,10 @@ map P <Plug>(miniyank-autoPut)
 map <leader>p <Plug>(miniyank-cycle)
 map <leader>P <Plug>(miniyank-cycleback)
 
-"map f <Plug>Sneak_f
-"map F <Plug>Sneak_F
-"map t <Plug>Sneak_t
-"map T <Plug>Sneak_T
+nnoremap <C-c> "+yy
+vnoremap <C-c> "+y
+nnoremap <C-S-c> "*yy
+vnoremap <C-S-c> "*y
+
+nnoremap <C-v> "+p
+nnoremap <C-S-v> "*p

@@ -76,9 +76,15 @@ lsp_installer.on_server_ready(function(server)
     end
 end)
 
+local lspkind = require('lspkind')
 local cmp = require'cmp'
 cmp.setup({
-  -- Enable LSP snippets
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+    })
+  },
   snippet = {
     expand = function(args)
         vim.fn["vsnip#anonymous"](args.body)
@@ -105,7 +111,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'vsnip' }, -- Not sure I actually use snippets
     { name = 'path' },
-    { name = 'buffer' },
+    --{ name = 'buffer' },
   },
   completion = {
       keyword_length = 3,

@@ -1,5 +1,4 @@
 Plug 'vim-scripts/matchit.zip'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-conflicted' "TODO
@@ -36,7 +35,6 @@ Plug 'simrat39/rust-tools.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'williamboman/nvim-lsp-installer'
-Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'ggandor/leap.nvim'
 Plug 'nvim-lualine/lualine.nvim'
@@ -44,7 +42,11 @@ Plug 'jedrzejboczar/toggletasks.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'saecki/crates.nvim', { 'tag': 'v0.2.1' }
 Plug 'rhysd/clever-f.vim'
+Plug 'AlphaTechnolog/onedarker.nvim'
+Plug 'hashivim/vim-terraform'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'onsails/lspkind.nvim'
+Plug 'j-hui/fidget.nvim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

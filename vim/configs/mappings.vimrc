@@ -1,5 +1,4 @@
 nnoremap <S-q> :tabclose<cr>
-nmap _ :NvimTreeToggle<CR>
 nmap <leader>q :tabonly<CR>
 nmap / /\v
 
@@ -37,7 +36,7 @@ nnoremap <tab> :tabnext<cr>
 nnoremap <S-tab> :tabprev<cr>
 
 nmap <C-t> :tabnew<cr>
-nmap - :Explore<cr>
+nmap _ :Explore<CR>
 
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
@@ -54,3 +53,5 @@ nnoremap <C-x> "+dd
 
 nnoremap <C-v> "+p
 nnoremap <C-S-v> "*p
+
+au FileType netrw nnoremap <buffer> _ <Plug>NetrwBrowseUpDir<Space>

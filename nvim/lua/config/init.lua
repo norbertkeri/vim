@@ -114,6 +114,18 @@ null_ls.setup {
   }
 }
 
+
+local function delete_special()
+    local line_data = vim.api.nvim_win_get_cursor(0) -- returns {row, col}
+    local current_line = vim.api.nvim_buf_get_lines(0, line_data[1]-1, line_data[1], false)
+    if current_line[1] == "" then
+        return '"_dd'
+    else
+        return 'dd'
+    end
+end
+vim.keymap.set( "n", "dd", delete_special, { noremap = true, expr = true } )
+
 require "lsp_signature".setup()
 local modname = ...
 require(modname .. '.lsp')

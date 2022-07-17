@@ -21,7 +21,6 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 "nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
-"nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> ge    <cmd>lua vim.diagnostic.open_float()<CR>
 
 set updatetime=300
@@ -34,7 +33,8 @@ set signcolumn=yes
 
 let g:completion_enable_auto_paren = 1
 
-map ga :lua vim.lsp.buf.code_action()<cr>
+nnoremap ga :lua vim.lsp.buf.code_action()<cr>
+vnoremap ga :lua vim.lsp.buf.range_code_action()<cr>
 
 map <leader>s :Telescope lsp_workspace_symbols<cr>
 map <leader>e :Telescope diagnostics theme=get_dropdown<cr>

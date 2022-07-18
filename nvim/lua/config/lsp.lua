@@ -62,9 +62,6 @@ lsp_installer.on_server_ready(function(server)
                         procMacro = {
                             enable = true
                         },
-                        diagnostics = {
-                            disabled =  {"unresolved-proc-macro"}
-                        }
                     }
                 }
             }),
@@ -151,4 +148,8 @@ augroup END
 require "lsp_signature".setup({
     hint_prefix = "",
     extra_trigger_chars = {"(", ","},
+})
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
 })

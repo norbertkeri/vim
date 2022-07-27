@@ -1,4 +1,6 @@
 local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.setup {}
+local lspconfig = require("lspconfig")
 
 vim.fn.sign_define("DiagnosticSignError",
 {text = " ", texthl = "DiagnosticSignError"})
@@ -9,69 +11,64 @@ vim.fn.sign_define("DiagnosticSignInfo",
 vim.fn.sign_define("DiagnosticSignHint",
 {text = "", texthl = "DiagnosticSignHint"})
 
-lsp_installer.on_server_ready(function(server)
-    local opts = {}
-    if server.name == "sumneko_lua" then
-        local myopts = {
-            settings = {
-                Lua = {
-                    runtime = {
-                        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                        version = 'LuaJIT',
-                        -- Setup your lua path
-                        path = runtime_path,
-                    },
-                    diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = {'vim'},
-                    },
-                    workspace = {
-                        -- Make the server aware of Neovim runtime files
-                        library = vim.api.nvim_get_runtime_file("", true),
-                    },
-                    -- Do not send telemetry data containing a randomized but unique identifier
-                    telemetry = {
-                        enable = false,
-                    },
+lspconfig.sumneko_lua.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = runtime_path,
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'},
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        }
+    }
+};
+
+local function on_attach(client, bufnr)
+  -- set up buffer keymaps, etc.
+end
+
+require("rust-tools").setup {
+    tools = {
+        autoSetHints = true,
+        hover_with_actions = false,
+        inlay_hints = {
+            show_parameter_hints = true,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+        },
+    },
+    server = {
+        on_attach = on_attach,
+        settings = {
+            ["rust-analyzer"] = {
+                completion = {
+                    postfix = {
+                        enable = false
+                    }
+                },
+                checkOnSave = {
+                    command = "clippy"
+                },
+                procMacro = {
+                    enable = true
                 },
             }
         }
-        server:setup(myopts)
-    elseif server.name == "rust_analyzer" then
-        local rustopts = {
-            tools = {
-                autoSetHints = true,
-                hover_with_actions = false,
-                inlay_hints = {
-                    show_parameter_hints = true,
-                    parameter_hints_prefix = "",
-                    other_hints_prefix = "",
-                },
-            },
-            server = vim.tbl_deep_extend("force", server:get_default_options(), opts, {
-                settings = {
-                    ["rust-analyzer"] = {
-                        completion = {
-                            postfix = {
-                                enable = false
-                            }
-                        },
-                        checkOnSave = {
-                            command = "clippy"
-                        },
-                        procMacro = {
-                            enable = true
-                        },
-                    }
-                }
-            }),
-        }
-        require("rust-tools").setup(rustopts)
-        server:attach_buffers()
-    else
-        server:setup(opts)
-    end
-end)
+    }
+}
 
 local cmp = require'cmp'
 cmp.setup({

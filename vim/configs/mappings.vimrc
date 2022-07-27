@@ -55,3 +55,5 @@ nnoremap <C-v> "+p
 nnoremap <C-S-v> "*p
 
 au FileType netrw nnoremap <buffer> _ <Plug>NetrwBrowseUpDir<Space>
+au FileType rust nnoremap <buffer> <leader>d :RustOpenExternalDocs<cr>
+

@@ -44,7 +44,6 @@ Plug 'saecki/crates.nvim', { 'tag': 'v0.2.1' }
 Plug 'rhysd/clever-f.vim'
 Plug 'AlphaTechnolog/onedarker.nvim'
 Plug 'hashivim/vim-terraform'
-Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'mhartington/oceanic-next'

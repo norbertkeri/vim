@@ -106,15 +106,6 @@ if vim.env.TERM == 'xterm-kitty' then
   vim.cmd([[autocmd UILeave * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[<1u") | endif]])
 end
 
-local null_ls = require("null-ls")
-
-null_ls.setup {
-  sources = {
-    null_ls.builtins.code_actions.gitsigns
-  }
-}
-
-
 local function delete_special()
   if vim.api.nvim_get_current_line():match("^%s*$") then
     return "\"_dd"
@@ -124,7 +115,6 @@ local function delete_special()
 end
 
 vim.keymap.set( "n", "dd", delete_special, { noremap = true, expr = true } )
-
 require "lsp_signature".setup()
 local modname = ...
 require(modname .. '.lsp')

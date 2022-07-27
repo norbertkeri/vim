@@ -9,7 +9,6 @@ set expandtab
 set wildmenu
 set wildmode=list:longest
 set wildignore+=*.a,*.o,*.bmp,*.png,*.gif,*.jpg,*.jpeg,.git,.hg,.svn,*~,*.swp,*.tmp,*/.git/*,*/.hg/*,*/.svn/*,app/cache/*,app/logs,.sass-cache,node_modules,web/built/*
-set completeopt+=longest
 set ignorecase
 set smartcase
 set laststatus=2

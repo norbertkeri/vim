@@ -124,3 +124,30 @@ require(modname .. '.toggletasks')
 require "crates".setup()
 require "detect-language".setup()
 require"fidget".setup{}
+
+
+local overseer = require("overseer")
+overseer.setup()
+overseer.register_template({
+    -- Required fields
+    name = "Gradle build",
+    builder = function(params)
+        -- This must return an overseer.TaskDefinition
+        return {
+            -- cmd is the only required field
+            cmd = {'./gradlew'},
+            -- additional arguments for the cmd
+            args = {"build"},
+            -- the name of the task (defaults to the cmd of the task)
+            name = "Build",
+        }
+    end,
+    condition = {
+        callback = function(_search)
+            if io.open("build.gradle", "r") then
+                return true
+            end
+            return false
+        end,
+    },
+})

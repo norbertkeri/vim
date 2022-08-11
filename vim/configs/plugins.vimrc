@@ -47,6 +47,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'onsails/lspkind.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'mhartington/oceanic-next'
+Plug 'stevearc/overseer.nvim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

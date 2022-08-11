@@ -47,6 +47,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'onsails/lspkind.nvim'
 Plug 'j-hui/fidget.nvim'
 Plug 'mhartington/oceanic-next'
+Plug 'marko-cerovac/material.nvim'
 Plug 'stevearc/overseer.nvim'
 
 " Colors
@@ -61,7 +62,6 @@ Plug 'catppuccin/nvim'
 Plug 'devnnys/spaceodyssey.nvim'
 Plug 'rebelot/kanagawa.nvim'
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'spywhere/detect-language.nvim'
 
 " CoC
 "Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}

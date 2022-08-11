@@ -11,6 +11,13 @@ vim.fn.sign_define("DiagnosticSignInfo",
 vim.fn.sign_define("DiagnosticSignHint",
 {text = "", texthl = "DiagnosticSignHint"})
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.jsonls.setup {
+  capabilities = capabilities,
+}
+
 lspconfig.sumneko_lua.setup {
     settings = {
         Lua = {
@@ -65,6 +72,16 @@ require("rust-tools").setup {
                 procMacro = {
                     enable = true
                 },
+            }
+        }
+    }
+}
+
+require('lspconfig').yamlls.setup {
+    settings = {
+        yaml = {
+            schemas = {
+                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
             }
         }
     }

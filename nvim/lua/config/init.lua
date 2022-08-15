@@ -122,7 +122,6 @@ require(modname .. '.toggleterm')
 require(modname .. '.lualine')
 require(modname .. '.toggletasks')
 require "crates".setup()
-require "detect-language".setup()
 require"fidget".setup{}
 
 

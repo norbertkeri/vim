@@ -103,7 +103,7 @@ if has('persistent_undo')
 endif
 
 " Highlight blocks of code in markdown
-let g:markdown_fenced_languages = ['rust', 'yaml', 'python', 'bash=sh', 'php']
+let g:markdown_fenced_languages = ['rust', 'yaml', 'python', 'bash=sh', 'php', 'groovy', 'kotlin']
 let g:vim_markdown_conceal = 1
 
 set conceallevel=2

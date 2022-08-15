@@ -49,6 +49,7 @@ Plug 'j-hui/fidget.nvim'
 Plug 'mhartington/oceanic-next'
 Plug 'marko-cerovac/material.nvim'
 Plug 'stevearc/overseer.nvim'
+Plug 'udalov/kotlin-vim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

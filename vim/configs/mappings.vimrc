@@ -48,9 +48,6 @@ vnoremap <C-c> "+y
 nnoremap <C-S-c> "*yy
 vnoremap <C-S-c> "*y
 
-vnoremap <C-x> "+d
-nnoremap <C-x> "+dd
-
 nnoremap <C-v> "+p
 nnoremap <C-S-v> "*p
 

@@ -20,8 +20,8 @@ nnoremap <silent> ge    <cmd>lua vim.diagnostic.open_float()<CR>
 set updatetime=300
 
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> <leader>j <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> <leader>k <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> <leader>j <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> <leader>k <cmd>lua vim.diagnostic.goto_prev()<CR>
 
 set signcolumn=yes
 

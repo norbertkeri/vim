@@ -117,9 +117,7 @@ vim.keymap.set( "n", "dd", delete_special, { noremap = true, expr = true } )
 require "lsp_signature".setup()
 local modname = ...
 require(modname .. '.lsp')
-require(modname .. '.toggleterm')
 require(modname .. '.lualine')
-require(modname .. '.toggletasks')
 require "crates".setup()
 require"fidget".setup{}
 

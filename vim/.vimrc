@@ -16,3 +16,6 @@ end
 if has("gui_running")
     runtime configs/gui.vimrc
 end
+
+autocmd VimEnter * FloatermNew --name=common --height=0.8 --width=0.8 --silent --autoclose=0
+"Check this: vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

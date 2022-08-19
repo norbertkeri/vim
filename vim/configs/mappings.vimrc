@@ -35,7 +35,6 @@ nnoremap zz yyp^i//<esc>j
 nnoremap <tab> :tabnext<cr>
 nnoremap <S-tab> :tabprev<cr>
 
-nmap <C-t> :tabnew<cr>
 nmap _ :Explore<CR>
 
 map p <Plug>(miniyank-autoput)
@@ -54,3 +53,5 @@ nnoremap <C-S-v> "*p
 au FileType netrw nnoremap <buffer> _ <Plug>NetrwBrowseUpDir<Space>
 au FileType rust nnoremap <buffer> <leader>d :RustOpenExternalDocs<cr>
 
+nnoremap <silent> <C-t>   :FloatermToggle common<CR>
+tnoremap <silent> <C-t>   <C-\><C-n>:FloatermToggle common<CR>

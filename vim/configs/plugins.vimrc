@@ -50,6 +50,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'marko-cerovac/material.nvim'
 Plug 'stevearc/overseer.nvim'
 Plug 'udalov/kotlin-vim'
+Plug 'm-demare/hlargs.nvim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

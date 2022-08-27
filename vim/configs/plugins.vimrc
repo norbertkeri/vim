@@ -50,6 +50,7 @@ Plug 'stevearc/overseer.nvim'
 Plug 'udalov/kotlin-vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'm-demare/hlargs.nvim'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " Colors
 Plug 'challenger-deep-theme/vim'
@@ -74,4 +75,5 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/vim-vsnip' "Not sure I actually use snippets?
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-vsnip'

@@ -1,0 +1,46 @@
+{
+  "yiewview": {
+    "prefix": ["yewview"],
+    "body": [
+      "struct ${1}View {",
+      "\t${2}",
+      "}",
+      "",
+      "#[derive(Debug, PartialEq, Properties)]",
+      "struct $1Props {",
+      "\t$3",
+      "}",
+      "",
+      "pub enum $1Msg {",
+      "\t$4",
+      "}",
+      "impl Component for $1View {",
+      "\ttype Message = $1Msg;",
+      "\ttype Properties = $1Props;",
+      "",
+      "\tfn create(_ctx: &Context<Self>) -> Self {",
+      "\t\tSelf {",
+      "\t\t}",
+      "",
+      "\tfn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {",
+      "\t\tmatch msg {",
+      "\t\t}",
+      "\tfalse",
+      "\t}",
+      "",
+      "\tfn view(&self, ctx: &Context<Self>) -> Html {",
+      "\t\thtml! {",
+      "\t\t\t<p>{\"Hello from $1View\"}</p>",
+      "\t\t}",
+      "\t}",
+      "}"
+    ],
+    "description": "Yew component definition"
+  },
+  "yewprelude": {
+    "prefix": ["yewpre"],
+    "body": [
+        "use yew::prelude::*;"
+    ]
+  }
+}

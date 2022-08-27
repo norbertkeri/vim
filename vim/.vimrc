@@ -9,6 +9,7 @@ runtime configs/mappings.vimrc
 runtime configs/functions.vimrc
 "runtime configs/coc.vimrc
 runtime configs/lsp.vimrc
+runtime configs/snippets.vimrc
 if get(g:, "is_colemak", 0)
     runtime configs/colemak.vim
 end

@@ -51,6 +51,7 @@ Plug 'udalov/kotlin-vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'm-demare/hlargs.nvim'
 Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'EdenEast/nightfox.nvim'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

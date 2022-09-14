@@ -117,7 +117,6 @@ vim.keymap.set( "n", "dd", delete_special, { noremap = true, expr = true } )
 require "lsp_signature".setup()
 local modname = ...
 require(modname .. '.lsp')
-require(modname .. '.lualine')
 require "crates".setup()
 require"fidget".setup{}
 
@@ -148,3 +147,21 @@ overseer.register_template({
     },
 })
 require('hlargs').setup()
+require('nightfox').setup({
+    options = {
+        modules = {
+            cmp = true,
+            diagnostic = {
+                enable = true
+            },
+            fidget = true,
+            gitsigns = true,
+            lsp_trouble = true,
+            telescope = true,
+            treesitter = true,
+            native_lsp = true,
+        }
+    }
+})
+
+require(modname .. '.lualine')

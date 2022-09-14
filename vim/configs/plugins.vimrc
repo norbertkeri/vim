@@ -1,7 +1,7 @@
 Plug 'vim-scripts/matchit.zip'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'christoomey/vim-conflicted' "TODO
+Plug 'sindrets/diffview.nvim'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-eunuch'
 Plug 'dyng/ctrlsf.vim'
@@ -9,7 +9,6 @@ Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'othree/html5.vim'
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'tpope/vim-fugitive'
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 Plug 'wellle/targets.vim'
 Plug 'ryvnf/readline.vim'

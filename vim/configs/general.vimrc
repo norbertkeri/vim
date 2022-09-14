@@ -162,3 +162,6 @@ function! s:setupConflicted()
     set nofoldenable
 endfunction
 autocmd User VimConflicted call s:setupConflicted()
+
+" Show pretty slashes for removed chunks in diffs
+set fillchars+=diff:╱

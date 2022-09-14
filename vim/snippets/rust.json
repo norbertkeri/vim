@@ -1,13 +1,13 @@
 {
-  "yiewview": {
+  "yewview": {
     "prefix": ["yewview"],
     "body": [
-      "struct ${1}View {",
+      "pub struct ${1}View {",
       "\t${2}",
       "}",
       "",
       "#[derive(Debug, PartialEq, Properties)]",
-      "struct $1Props {",
+      "pub struct $1Props {",
       "\t$3",
       "}",
       "",
@@ -21,11 +21,12 @@
       "\tfn create(_ctx: &Context<Self>) -> Self {",
       "\t\tSelf {",
       "\t\t}",
+      "\t}",
       "",
       "\tfn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {",
       "\t\tmatch msg {",
       "\t\t}",
-      "\tfalse",
+      "\t\tfalse",
       "\t}",
       "",
       "\tfn view(&self, ctx: &Context<Self>) -> Html {",
@@ -41,6 +42,49 @@
     "prefix": ["yewpre"],
     "body": [
         "use yew::prelude::*;"
+    ]
+  },
+  "yewcontext": {
+    "prefix": ["yewcontext"],
+    "description": "A yew context component",
+    "body": [
+        "#[derive(Debug)]",
+        "pub enum $1Action {",
+            "\t$2",
+        "}",
+        "",
+        "#[derive(Debug, PartialEq, Default)]",
+        "pub struct $1 {",
+            "\t$3",
+        "}",
+        "",
+        "impl Reducible for $1 {",
+            "\ttype Action = $1Action;",
+            "",
+            "\tfn reduce(self: std::rc::Rc<Self>, action: Self::Action) -> std::rc::Rc<Self> {",
+                "\t\tmatch action {",
+                "\t\t};",
+                "\t\tself",
+            "\t}",
+        "}",
+        "",
+        "pub type $1Context = UseReducerHandle<$1>;",
+        "",
+        "#[derive(Debug, Properties, PartialEq)]",
+        "pub struct $1ProviderProps {",
+            "\t#[prop_or_default]",
+            "\tpub children: Children,",
+        "}",
+        "",
+        "#[function_component($1Provider)]",
+        "pub fn $1_provider(props: &$1ProviderProps) -> Html {",
+            "\tlet context = use_reducer($1::default);",
+            "\thtml! {",
+                "\t\t<ContextProvider<$1Context> context={context}>",
+                    "\t\t\t{props.children.clone()}",
+                "\t\t</ContextProvider<$1Context>>",
+            "\t}",
+        "}"
     ]
   }
 }

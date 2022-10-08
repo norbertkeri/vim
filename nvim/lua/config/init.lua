@@ -17,6 +17,15 @@ require'nvim-treesitter.configs'.setup {
     max_file_lines = nil, -- Do not enable for files with more than n lines, int
     --colors = {}, -- table of hex strings
     --termcolors = {} -- table of colour name strings
+  },
+  incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<cr>",
+        node_incremental = "<cr>",
+        scope_incremental = "<tab>",
+        node_decremental = "<S-tab>",
+      }
   }
 }
 

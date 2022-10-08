@@ -114,31 +114,15 @@ require"fidget".setup{}
 
 
 local overseer = require("overseer")
-overseer.setup()
-overseer.register_template({
-    -- Required fields
-    name = "Gradle build",
-    builder = function(params)
-        -- This must return an overseer.TaskDefinition
-        return {
-            -- cmd is the only required field
-            cmd = {'./gradlew'},
-            -- additional arguments for the cmd
-            args = {"build"},
-            -- the name of the task (defaults to the cmd of the task)
-            name = "Build",
+overseer.setup({
+    task_list = {
+        bindings = {
+            ["q"] = "<c-w>q"
         }
-    end,
-    condition = {
-        callback = function(_search)
-            if io.open("build.gradle", "r") then
-                return true
-            end
-            return false
-        end,
-    },
+    }
 })
 require('hlargs').setup()
+overseer.load_template("tasks")
 require('nightfox').setup({
     options = {
         modules = {

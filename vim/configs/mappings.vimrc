@@ -56,3 +56,6 @@ au FileType rust nnoremap <buffer> <leader>d :RustOpenExternalDocs<cr>
 
 nnoremap <silent> <C-t>   :FloatermToggle common<CR>
 tnoremap <silent> <C-t>   <C-\><C-n>:FloatermToggle common<CR>
+
+map <leader>oo :OverseerToggle<cr>
+map <leader>or :OverseerRun<cr>

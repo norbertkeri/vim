@@ -121,7 +121,6 @@ overseer.setup({
         }
     }
 })
-require('hlargs').setup()
 overseer.load_template("tasks")
 require('nightfox').setup({
     options = {

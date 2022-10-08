@@ -50,6 +50,7 @@ Plug 'udalov/kotlin-vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'klen/nvim-config-local'
 
 " Colors
 Plug 'challenger-deep-theme/vim'

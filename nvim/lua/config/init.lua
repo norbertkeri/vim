@@ -55,32 +55,15 @@ require('trouble').setup()
 require('leap').set_default_keymaps()
 
 local catppuccin = require("catppuccin")
+
+vim.g.catppuccin_flavour = "mocha"
 catppuccin.setup({
     transparent_background = false,
     term_colors = false,
-    styles = {
-        comments = "italic",
-        functions = "italic",
-        keywords = "italic",
-        strings = "NONE",
-        variables = "NONE",
-    },
     integrations = {
         treesitter = true,
         native_lsp = {
             enabled = true,
-            virtual_text = {
-                errors = "italic",
-                hints = "italic",
-                warnings = "italic",
-                information = "italic",
-            },
-            underlines = {
-                errors = "italic",
-                hints = "italic",
-                warnings = "italic",
-                information = "italic",
-            },
         },
         lsp_trouble = true,
         lsp_saga = false,

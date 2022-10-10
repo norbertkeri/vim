@@ -152,9 +152,6 @@ let g:sneak#s_next = 1
 
 let g:mergetool_layout = 'mr,b'
 
-let g:do_filetype_lua = 1
-let g:did_load_filetypes = 0
-
 function! s:setupConflicted()
     set stl+=%{ConflictedVersion()}
     " Resolve and move to next conflicted file.

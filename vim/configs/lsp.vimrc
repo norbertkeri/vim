@@ -30,7 +30,7 @@ let g:completion_enable_auto_paren = 1
 nnoremap ga :lua vim.lsp.buf.code_action()<cr>
 vnoremap ga :lua vim.lsp.buf.range_code_action()<cr>
 
-map <leader>s :Telescope lsp_workspace_symbols<cr>
+map <leader>s :Telescope lsp_dynamic_workspace_symbols<cr>
 map <leader>e :Telescope diagnostics theme=get_dropdown<cr>
 map <leader>d :Telescope lsp_definitions<cr>
 map <leader>r :Telescope lsp_references<cr>

@@ -37,7 +37,7 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'ggandor/leap.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
-Plug 'saecki/crates.nvim', { 'tag': 'v0.2.1' }
+Plug 'saecki/crates.nvim', { 'tag': 'v0.3.0' }
 Plug 'rhysd/clever-f.vim'
 Plug 'AlphaTechnolog/onedarker.nvim'
 Plug 'hashivim/vim-terraform'

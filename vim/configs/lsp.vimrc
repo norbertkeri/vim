@@ -22,6 +22,8 @@ set updatetime=300
 " Goto previous/next diagnostic warning/error
 nnoremap <silent> <leader>j <cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent> <leader>k <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> <leader>n <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> <leader>e <cmd>lua vim.diagnostic.goto_prev()<CR>
 
 set signcolumn=yes
 
@@ -31,6 +33,6 @@ nnoremap ga :lua vim.lsp.buf.code_action()<cr>
 vnoremap ga :lua vim.lsp.buf.range_code_action()<cr>
 
 map <leader>s :Telescope lsp_dynamic_workspace_symbols<cr>
-map <leader>e :Telescope diagnostics theme=get_dropdown<cr>
+map <leader>i :TroubleToggle<cr>
 map <leader>d :Telescope lsp_definitions<cr>
 map <leader>r :Telescope lsp_references<cr>

@@ -1,5 +1,6 @@
 nnoremap <S-q> :tabclose<cr>
 nmap <leader>q :tabonly<CR>
+nmap <a-q> :tabonly<CR>
 nmap / /\v
 
 " Moving between windows
@@ -13,12 +14,7 @@ nnoremap <a-m> <c-w>h
 nnoremap <a-n> <c-w>j
 nnoremap <a-e> <c-w>k
 nnoremap <a-i> <c-w>l
-nnoremap <a-q> :close<cr>
 nnoremap <a-t> :close<cr>
-
-"nmap <leader>f :Files<cr>
-"nmap <leader>b :Buffers<cr>
-"nmap <leader>m :History<cr>
 
 nmap <leader>f :Telescope find_files<cr>
 nmap <leader>b :Telescope buffers<cr>

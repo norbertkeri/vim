@@ -1,4 +1,6 @@
-let g:vsnip_snippet_dir = vimDir . '/snippets'
+vim.g.vsnip_snippet_dir = os.getenv('HOME') .. '/.vimrepository/snippets'
+
+vim.cmd([[
 " Expand
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
@@ -20,3 +22,4 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 "xmap        s   <Plug>(vsnip-select-text)
 "nmap        S   <Plug>(vsnip-cut-text)
 "xmap        S   <Plug>(vsnip-cut-text)
+]])

@@ -1,6 +1,4 @@
 vim/.netrwhist
 vim/swap/*
-vim/configs/local.vimrc
-vim/undodir/*
-vim/backup
-plugged/*
+nvim/lua/visko/local.lua
+undodir/*

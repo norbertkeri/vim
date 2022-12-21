@@ -1,8 +1,11 @@
-setlocal ts=2 sts=2 sw=2
-setlocal expandtab 
-setlocal nofoldenable
-setlocal indentkeys-=0#
+vim.opt_local.ts = 2
+vim.opt_local.sts = 2
+vim.opt_local.sw = 2
 
+vim.opt_local.foldenable = false
+vim.opt_local.indentkeys:remove("0#")
+
+vim.cmd([[
 function! GoToNextIndent(inc)
     " Get the cursor current position
     let currentPos = getpos('.')
@@ -21,6 +24,7 @@ function! GoToNextIndent(inc)
         call setpos('.', currentPos)
     endif
 endfunction
+]])
 
-nnoremap <buffer> <leader>ip :call GoToNextIndent(1)<CR>
-nnoremap <buffer> <leader>in :call GoToNextIndent(-1)<CR>
+vim.keymap.set("n", "<leader>ij", ":call GoToNextIndent(1)<cr>", { buffer = true })
+vim.keymap.set("n", "<leader>ik", ":call GoToNextIndent(-1)<cr>", { buffer = true })

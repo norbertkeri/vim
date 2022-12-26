@@ -28,16 +28,6 @@ return {
                 lualine_y = {},
                 lualine_z = {}
             },
-            tabline = {
-                lualine_a = {{'tabs', mode = 1}},
-                lualine_b = {
-                    { navic.get_location, cond = navic.is_available },
-                },
-                lualine_c = {},
-                lualine_x = {},
-                lualine_y = {},
-                lualine_z = {}
-            },
             extensions = {}
         }
     end

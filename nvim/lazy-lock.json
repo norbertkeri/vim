@@ -45,6 +45,7 @@
   "rust-tools.nvim": { "branch": "master", "commit": "99fd1238c6068d0637df30b6cee9a264334015e9" },
   "spacecamp": { "branch": "master", "commit": "8ff0ed105d1403a60e1f79150b8b645a3465b3a0" },
   "spaceodyssey.nvim": { "branch": "lua", "commit": "507ab582c3c572add79de9bd6da43615026a2f3a" },
+  "tabby.nvim": { "branch": "main", "commit": "187b604da1a6452c700ce21fdf340ffbea956298" },
   "targets.vim": { "branch": "master", "commit": "8d6ff2984cdfaebe5b7a6eee8f226a6dd1226f2d" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "fab3e2212e206f4f8b3bbaa656e129443c9b802e" },
   "telescope-ui-select.nvim": { "branch": "master", "commit": "62ea5e58c7bbe191297b983a9e7e89420f581369" },

@@ -111,6 +111,13 @@ local plugins = {
             })
         end
     },
+    {
+        'nanozuki/tabby.nvim',
+        config = function()
+            vim.opt.showtabline = 2
+            require('tabby.tabline').use_preset('active_wins_at_tail')
+        end
+    }
 }
 
 local ret = _.merge_list(autoplugins, plugins)

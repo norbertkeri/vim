@@ -13,14 +13,14 @@ local function autosetup(...)
     }
 end
 
-local autoplugins = _.map(autosetup, {
+local autoplugins = _.map({
     { 'lewis6991/gitsigns.nvim' },
     { 'folke/trouble.nvim' },
     { 'j-hui/fidget.nvim' },
     { 'kylechui/nvim-surround' },
     { 'ggandor/flit.nvim' },
     { 'numToStr/Comment.nvim' },
-})
+}, autosetup)
 
 local plugins = {
     {
@@ -111,13 +111,6 @@ local plugins = {
             })
         end
     },
-    {
-        'nanozuki/tabby.nvim',
-        config = function()
-            vim.opt.showtabline = 2
-            require('tabby.tabline').use_preset('active_wins_at_tail')
-        end
-    }
 }
 
 local ret = _.merge_list(autoplugins, plugins)

@@ -7,14 +7,14 @@ return {
     },
     config = function()
         vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-        vim.api.nvim_set_keymap("n", "_", ":Neotree reveal float<cr>", { noremap = true })
+        vim.api.nvim_set_keymap("n", "_", ":Neotree float reveal_force_cwd<cr>", { noremap = true })
         require("neo-tree").setup({
             source_selector = {
                 winbar = true,
                 statusline = true
             },
             close_if_last_window = true,
-            popup_border_style = "NC",
+            popup_border_style = "rounded",
             window = {
                 popup = {
                     position = { col = "100%", row = "2" },
@@ -46,6 +46,7 @@ return {
                         }
                     },
                     ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
+                    ["<c-d>"] = "drag_and_drop",
                     ["d"] = "delete",
                     ["r"] = "rename",
                     ["y"] = "copy_to_clipboard",
@@ -53,6 +54,7 @@ return {
                     ["p"] = "paste_from_clipboard",
                     ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
                     ["q"] = "close_window",
+                    ["_"] = "close_window",
                     ["<esc>"] = "close_window",
                     ["R"] = "refresh",
                     ["?"] = "show_help",
@@ -60,28 +62,36 @@ return {
                 }
             },
             filesystem = {
+                bind_to_cwd = false,
+                commands = {
+                    drag_and_drop = function(state)
+                        local node = state.tree:get_node()
+                        local path = node:get_id()
+                        -- Linux: open file in default application
+                        vim.api.nvim_command(string.format("silent !dragon-drop -T -x '%s'", path))
+                    end,
+                },
                 filtered_items = {
                     always_show = {
                         ".gitignore"
                     },
                     never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
-                    ".DS_Store",
-                    "thumbs.db"
+                        ".DS_Store",
+                        "thumbs.db"
+                    },
+                    never_show_by_pattern = { -- uses glob style patterns
+                        "*.orig"
+                    },
+                    group_empty_dirs = false, -- when true, empty folders will be grouped together
+                    use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
                 },
-                never_show_by_pattern = { -- uses glob style patterns
-                "*.orig"
-            },
-            group_empty_dirs = false, -- when true, empty folders will be grouped together
-            use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
-        },
-        window = {
-            mappings = {
-                ["gn"] = "prev_git_modified",
-                ["gp"] = "next_git_modified",
+                window = {
+                    mappings = {
+                        ["gn"] = "prev_git_modified",
+                        ["gp"] = "next_git_modified",
+                    }
+                }
             }
-        }
-    }
-})
-
-end
+        })
+    end
 }

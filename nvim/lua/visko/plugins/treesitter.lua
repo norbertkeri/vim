@@ -1,6 +1,6 @@
 local setup = function()
     require('nvim-treesitter.configs').setup {
-        ensure_installed = {"rust", "css", "dockerfile", "yaml", "fish", "html", "javascript", "json", "python", "php", "scss", "toml", "typescript", "hcl"},
+        ensure_installed = {"rust", "css", "dockerfile", "yaml", "fish", "html", "javascript", "json", "python", "php", "scss", "toml", "typescript", "hcl", "lua"},
         indent = {
             enable = true
         },

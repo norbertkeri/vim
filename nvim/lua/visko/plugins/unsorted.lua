@@ -99,7 +99,6 @@ local plugins = {
     },
     {
         'folke/neodev.nvim',
-        enabled = false
     },
     'wellle/targets.vim',
     'mbbill/undotree',

@@ -42,10 +42,8 @@ local setup_lspconfig = function()
     local lsp_installer = require("nvim-lsp-installer")
     lsp_installer.setup {}
 
-    --[[
     require("neodev").setup({
     })
-    --]]
 
     local lspconfig = require('lspconfig')
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -57,18 +55,6 @@ local setup_lspconfig = function()
         jedi_language_server = {},
         pyright = {},
         jsonls = {},
-        --[[
-        sumneko_lua = {
-            settings = {
-                Lua = {
-                    completion = {
-                        callSnippet = "Replace"
-                    }
-                }
-            }
-        }
-        --]]
-        --[[
         sumneko_lua = {
             settings = {
                 Lua = {
@@ -94,7 +80,6 @@ local setup_lspconfig = function()
                 }
             }
         },
-        ]]--
         yamlls = {
             settings = {
                 yaml = {

@@ -69,7 +69,7 @@ vim.opt.updatetime = 300
 
 vim.opt.diffopt:append("internal,algorithm:patience")
 
-vim.g.markdown_fenced_languages = { 'rust', 'yaml', 'python', 'bash=sh', 'php' }
+vim.g.markdown_fenced_languages = { 'rust', 'yaml', 'python', 'bash=sh', 'php', 'lua' }
 vim.g.vim_markdown_conceal = 1
 
 -- Map c-x c-b to autocomplete the list of open buffers

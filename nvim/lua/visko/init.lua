@@ -19,7 +19,7 @@ require(... .. ".mappings")
 require(... .. '.lsp')
 require(... .. '.snippets')
 
-is_colemak = false
+Is_colemak = false
 
 -- try to require a local file, but don't fail if it does not exist
 pcall(require, 'visko.local')

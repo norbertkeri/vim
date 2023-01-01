@@ -31,6 +31,12 @@ function M.setup_lsp_keymaps(lspclient, bufnr)
 
     if lspclient.name == "rust_analyzer" then
         bufmap('n', '<leader>d', ':RustOpenExternalDocs<cr>')
+        vim.cmd([[
+            augroup LspFormat
+            autocmd! * <buffer>
+            autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
+            augroup END
+        ]])
     end
 end
 

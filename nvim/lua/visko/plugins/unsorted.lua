@@ -61,7 +61,7 @@ local plugins = {
             -- Autofocus
             vim.g.ctrlsf_auto_focus = { at = "start" }
 
-            vim.g.ctrlsf_mapping = {next = "n", prev = "N", vsplit = "v", split = "s"}
+            vim.g.ctrlsf_mapping = {next = "n", prev = "N", vsplit = "v", split = "s", open = {"<cr>", "o"}, popen = "p", quit = "q"}
 
             -- Search regexes by default
             vim.g.ctrlsf_regex_pattern = 1

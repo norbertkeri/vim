@@ -1,31 +1,29 @@
 local cargo_toml_exists = function()
-    local f = io.open(vim.fn.getcwd() .. "/Cargo.toml")
-    if f ~= nil then
-        return true
-    end
-    return false
+    return io.open(vim.fn.getcwd() .. "/Cargo.toml")
 end
 
 local has_package = function(package)
     local f = io.open(vim.fn.getcwd() .. "/Cargo.toml")
     if f ~= nil then
         local contents = f:read("*a")
-        if contents:find(package) then
-            return true
-        end
+        return contents:find(package)
     end
     return false
+end
+
+local curried_has_package = function(package)
+    return {
+        condition = function()
+            return has_package(package)
+        end
+    }
 end
 
 local sqlx = {
     name = "Recreate database",
     desc = "sqlx:database:reset",
     params = {},
-    condition = {
-        callback = function(search)
-            return has_package("sqlx")
-        end
-    },
+    condition = curried_has_package("sqlx"),
     builder = function()
         return {
             cmd = {"sqlx"},

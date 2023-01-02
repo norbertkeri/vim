@@ -19,7 +19,6 @@ local setup_cmp = function()
             ['<Tab>'] = cmp.mapping.select_next_item(),
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-l>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.abort(),
             ['<CR>'] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Insert,
@@ -139,6 +138,8 @@ local setup_lspconfig = function()
                     }
                 }
             }
+        },
+        terraformls = {
         }
     }
 
@@ -203,6 +204,10 @@ return {
         'ray-x/lsp_signature.nvim',
         config = function()
             require "lsp_signature".setup({
+                max_height = 20,
+                max_width = 120,
+                doc_lines = 20,
+                hint_enable = true,
                 hint_prefix = "",
                 extra_trigger_chars = {"(", ","},
             })

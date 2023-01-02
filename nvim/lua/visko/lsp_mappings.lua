@@ -15,7 +15,7 @@ function M.setup_lsp_keymaps(lspclient, bufnr)
     bufmap('n', '<leader>e', vim.diagnostic.goto_prev)
 
     bufmap('n', 'ga', vim.lsp.buf.code_action)
-    bufmap('v', 'ga', vim.lsp.buf.range_code_action)
+    bufmap('v', 'ga', vim.lsp.buf.code_action)
     bufmap('n', 'K', vim.lsp.buf.hover)
     bufmap('n', '<leader>i', ':TroubleToggle<cr>')
 

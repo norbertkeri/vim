@@ -103,7 +103,10 @@ local setup_lspconfig = function()
                 settings = {
                     ["rust-analyzer"] = {
                         diagnostics = {
-                            disabled = {"incorrect-ident-case"}
+                            disabled = {"incorrect-ident-case"},
+                            experimental = {
+                                enable = true
+                            }
                         },
                         completion = {
                             postfix = {
@@ -116,6 +119,23 @@ local setup_lspconfig = function()
                         procMacro = {
                             enable = true
                         },
+                        inlayHints = {
+                            bindingModeHints = {
+                                enable = true
+                            },
+                            expressionAdjustmentHints = {
+                                enable = true
+                            },
+                            closureReturnTypeHints = {
+                                enable = true
+                            },
+                            lifetimeElisionHints = {
+                                enable = true
+                            },
+                            typeHints = {
+                                hideClosureInitialization = true
+                            },
+                        }
                     }
                 }
             }

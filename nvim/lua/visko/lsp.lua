@@ -24,7 +24,7 @@ vim.diagnostic.config({
 })
 
 _G.LspDiagnosticsShowPopup = function()
-    return vim.diagnostic.open_float(0, {scope="cursor", focusable=false})
+    return vim.diagnostic.open_float({scope="cursor", focusable=false})
 end
 
 -- Show diagnostics in a pop-up window on hover

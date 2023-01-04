@@ -1,10 +1,16 @@
 local setup_cmp = function()
     local cmp = require'cmp'
+    local documentation_window = cmp.config.window.bordered()
+    documentation_window.max_height = 60
+
     cmp.setup({
         preselect = cmp.PreselectMode.None,
+        experimental = {
+            ghost_text = true
+        },
         window = {
             completion = cmp.config.window.bordered(),
-            documentation = cmp.config.window.bordered(),
+            documentation = documentation_window
         },
         snippet = {
             expand = function(args)
@@ -17,7 +23,7 @@ local setup_cmp = function()
             -- Add tab support
             ['<S-Tab>'] = cmp.mapping.select_prev_item(),
             ['<Tab>'] = cmp.mapping.select_next_item(),
-            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.abort(),
             ['<CR>'] = cmp.mapping.confirm({
@@ -35,6 +41,7 @@ local setup_cmp = function()
             --{ name = 'buffer' },
         },
     })
+
 end
 
 local setup_lspconfig = function()
@@ -45,8 +52,7 @@ local setup_lspconfig = function()
     })
 
     local lspconfig = require('lspconfig')
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     local servers = {
@@ -185,7 +191,6 @@ local setup_lspconfig = function()
 end
 return {
     'williamboman/nvim-lsp-installer',
-    'onsails/lspkind.nvim',
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
@@ -204,9 +209,9 @@ return {
         'ray-x/lsp_signature.nvim',
         config = function()
             require "lsp_signature".setup({
-                max_height = 20,
+                max_height = 60,
                 max_width = 120,
-                doc_lines = 20,
+                doc_lines = 40,
                 hint_enable = true,
                 hint_prefix = "",
                 extra_trigger_chars = {"(", ","},

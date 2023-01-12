@@ -33,9 +33,9 @@ vim.keymap.set('v', '<s-K>', ":m '<-2<CR>gv=gv")
 vim.keymap.set('v', '<s-N>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<s-E>', ":m '<-2<CR>gv=gv")
 
+vim.keymap.set('n', '<F2>', ':tabnew ~/.vimrepository/nvim/lua/visko/plugins/unsorted.lua<cr>')
+
 --[[
-nmap <F2> :tabnew ~/.vimrepository/vim/configs/plugins.vimrc<cr>
 nmap <F3> :tabnew ~/.vimrepository/vim/configs/local.vimrc<cr>
 nmap <F4> :tabnew ~/.vimrepository/nvim/lua/config/init.lua<cr>
-
 ]]--

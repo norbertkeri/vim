@@ -4,10 +4,6 @@ local setup_cmp = function()
     documentation_window.max_height = 60
 
     cmp.setup({
-        preselect = cmp.PreselectMode.None,
-        experimental = {
-            ghost_text = true
-        },
         window = {
             completion = cmp.config.window.bordered(),
             documentation = documentation_window
@@ -60,7 +56,7 @@ local setup_lspconfig = function()
         jedi_language_server = {},
         pyright = {},
         jsonls = {},
-        sumneko_lua = {
+        lua_ls = {
             settings = {
                 Lua = {
                     runtime = {
@@ -109,9 +105,6 @@ local setup_lspconfig = function()
                     ["rust-analyzer"] = {
                         diagnostics = {
                             disabled = {"incorrect-ident-case"},
-                            experimental = {
-                                enable = true
-                            }
                         },
                         completion = {
                             postfix = {
@@ -154,6 +147,10 @@ local setup_lspconfig = function()
     local navic = require("nvim-navic")
     local on_attach = function(client, bufnr)
         require('visko.lsp_mappings').setup_lsp_keymaps(client, bufnr)
+
+        if client.name == "pyright" then
+            client.server_capabilities.completionProvider = false
+        end
 
         if client.server_capabilities.documentSymbolProvider then
             navic.attach(client, bufnr)
@@ -201,10 +198,7 @@ return {
         'hrsh7th/cmp-vsnip',
         config = setup_cmp
     },
-    {
-        'simrat39/rust-tools.nvim',
-        --config = setup_rust_tools
-    },
+    'simrat39/rust-tools.nvim',
     {
         'ray-x/lsp_signature.nvim',
         config = function()

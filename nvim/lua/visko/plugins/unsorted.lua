@@ -106,10 +106,10 @@ local plugins = {
         'norcalli/nvim-colorizer.lua',
         config = function ()
             require('colorizer').setup({'*'}, {
-                mode = 'foreground', rgb_fn = true
+                rgb_fn = true
             })
         end
-    },
+    }
 }
 
 local ret = _.merge_list(autoplugins, plugins)

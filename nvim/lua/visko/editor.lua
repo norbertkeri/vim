@@ -69,6 +69,10 @@ vim.opt.updatetime = 300
 
 vim.opt.diffopt:append("internal,algorithm:patience")
 
+
+-- Preview replace commands in a split window
+vim.opt.inccommand = "split"
+
 -- Map c-x c-b to autocomplete the list of open buffers
 vim.cmd([[
 inoremap <c-x><c-b> <c-r>=ListBuffers()<cr>

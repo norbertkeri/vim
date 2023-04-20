@@ -16,13 +16,20 @@ end
 local autoplugins = _.map({
     { 'lewis6991/gitsigns.nvim' },
     { 'folke/trouble.nvim' },
-    { 'j-hui/fidget.nvim' },
     { 'kylechui/nvim-surround' },
     { 'ggandor/flit.nvim' },
     { 'numToStr/Comment.nvim' },
 }, autosetup)
 
 local plugins = {
+    { 'j-hui/fidget.nvim', config = function()
+        require('fidget').setup({
+            text = {
+                spinner = "moon"
+            }
+        })
+        end
+    },
     {
         'ggandor/leap.nvim',
         config = function()

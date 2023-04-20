@@ -1,3 +1,13 @@
+local _ = require("visko.helpers")
+
+local active_lsps = function()
+    local clients = vim.lsp.get_active_clients()
+    local result = _.map(clients, function(e)
+        return e['name']
+    end)
+    return table.concat(result, ", ")
+end
+
 return {
     'nvim-lualine/lualine.nvim',
     config = function()
@@ -16,11 +26,17 @@ return {
                 lualine_a = { 'mode' },
                 lualine_b = {'branch', 'diff', 'diagnostics'},
                 lualine_c = {
-                     { navic.get_location, cond = navic.is_available },
+                     { function()
+                            return navic.get_location()
+                        end,
+                        cond = function()
+                            return navic.is_available()
+                        end
+                    },
                  },
-                lualine_x = {'encoding', 'fileformat', 'filetype'},
-                lualine_y = {'progress'},
-                lualine_z = {'location'}
+                lualine_x = {active_lsps, 'encoding', 'fileformat', 'location'},
+                lualine_y = {'filetype'},
+                lualine_z = {'progress'}
             },
             inactive_sections = {
                 lualine_a = {},

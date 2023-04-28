@@ -8,19 +8,18 @@ end
 local M = {}
 
 function M.setup_lsp_keymaps(lspclient, bufnr)
+
+    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
     bufmap('n', '<leader>s', tsbuiltin.lsp_dynamic_workspace_symbols)
     bufmap('n', '<leader>j', vim.diagnostic.goto_next)
     bufmap('n', '<leader>k', vim.diagnostic.goto_prev)
     bufmap('n', '<leader>n', vim.diagnostic.goto_next)
     bufmap('n', '<leader>e', vim.diagnostic.goto_prev)
 
-    bufmap('n', 'ga', vim.lsp.buf.code_action)
-    bufmap('v', 'ga', vim.lsp.buf.code_action)
+    bufmap({'n', 'v'}, 'ga', vim.lsp.buf.code_action)
     bufmap('n', 'K', vim.lsp.buf.hover)
     bufmap('n', '<leader>i', ':TroubleToggle<cr>')
-
---nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
---nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
     bufmap('n', 'gd', vim.lsp.buf.definition)
     bufmap('n', 'gD', vim.lsp.buf.implementation)

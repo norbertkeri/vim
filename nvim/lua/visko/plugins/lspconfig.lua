@@ -23,8 +23,8 @@ local setup_cmp = function()
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.abort(),
             ['<CR>'] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Insert,
-                select = false,
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = true,
             })
         }),
 

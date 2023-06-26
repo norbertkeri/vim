@@ -31,10 +31,35 @@ local plugins = {
         end
     },
     {
-        'ggandor/leap.nvim',
-        config = function()
-            require('leap').set_default_keymaps()
-        end
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
+        keys = {
+            {
+                "s",
+                mode = { "n", "x", "o" },
+                function()
+                    require("flash").jump()
+                end,
+                desc = "Flash",
+            },
+            {
+                "S",
+                mode = { "n", "o", "x" },
+                function()
+                    require("flash").treesitter()
+                end,
+                desc = "Flash Treesitter",
+            },
+            {
+                "r",
+                mode = "o",
+                function()
+                    require("flash").remote()
+                end,
+                desc = "Remote Flash",
+            },
+        },
     },
     {
         'saecki/crates.nvim',
@@ -53,15 +78,6 @@ local plugins = {
             vim.keymap.set('n', '<leader>P', '<Plug>(miniyank-cycleback)')
         end
     },
-    -- treesitter might handle these automatically
-    --'pangloss/vim-javascript',
-    --'mxw/vim-jsx', { 'for': 'javascript.jsx' }
-    --'hynek/vim-python-pep8-indent', { 'for': 'python' }
-    --'othree/html5.vim'
-    --'jparise/vim-graphql', { 'for': 'graphql' }
-    --'rust-lang/rust.vim'
-    --'leafgarland/typescript-vim'
-    -- 'peitalin/vim-jsx-typescript'
     {
         'dyng/ctrlsf.vim',
         config = function()
@@ -88,25 +104,7 @@ local plugins = {
             }
         end
     },
-    {
-        'kevinhwang91/nvim-hlslens',
-        config = function()
-            require('hlslens').setup({
-                calm_down = true
-            })
-            local kopts = {noremap = true, silent = true}
-
-            vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-            vim.api.nvim_set_keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-            vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-            vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-            vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-            vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-        end
-    },
-    {
-        'folke/neodev.nvim',
-    },
+    'folke/neodev.nvim',
     'wellle/targets.vim',
     'mbbill/undotree',
     {

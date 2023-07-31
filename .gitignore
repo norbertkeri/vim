@@ -2,3 +2,4 @@ vim/.netrwhist
 vim/swap/*
 nvim/lua/visko/local.lua
 undodir/*
+plugged/

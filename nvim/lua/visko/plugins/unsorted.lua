@@ -1,82 +1,41 @@
 local _ = require("visko.helpers")
 
-local function autosetup(...)
-    local url, modulename = unpack(...)
-    if modulename == nil then
-        modulename = url:match("[^/]+/([^.]+)")
-    end
-    return {
-        url,
-        config = function()
-            require(modulename).setup()
-        end
-    }
-end
-
-local autoplugins = _.map({
-    { 'lewis6991/gitsigns.nvim' },
-    { 'folke/trouble.nvim' },
-    { 'kylechui/nvim-surround' },
-    { 'ggandor/flit.nvim' },
-    { 'numToStr/Comment.nvim' },
-}, autosetup)
-
 local plugins = {
-    { 'j-hui/fidget.nvim', config = function()
-        require('fidget').setup({
+    { 'lewis6991/gitsigns.nvim', opts = {} },
+    { 'folke/trouble.nvim', opts = {} },
+    { 'numToStr/Comment.nvim', opts = {} },
+    { 'j-hui/fidget.nvim',
+        opts = {
             text = {
                 spinner = "moon"
             }
-        })
-        end
+        }
     },
     {
         "folke/flash.nvim",
         event = "VeryLazy",
-        opts = {},
+        opts = {
+            modes = {
+                char = {
+                    autohide = true,
+                    -- multi_line = false,
+                    highlight = { backdrop = false }
+                }
+            }
+        },
         keys = {
-            {
-                "s",
-                mode = { "n", "x", "o" },
-                function()
-                    require("flash").jump()
-                end,
-                desc = "Flash",
-            },
-            {
-                "S",
-                mode = { "n", "o", "x" },
-                function()
-                    require("flash").treesitter()
-                end,
-                desc = "Flash Treesitter",
-            },
-            {
-                "r",
-                mode = "o",
-                function()
-                    require("flash").remote()
-                end,
-                desc = "Remote Flash",
-            },
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
         },
     },
     {
         'saecki/crates.nvim',
         tag = 'v0.3.0',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            require "crates".setup()
-        end
-    },
-    {
-        'bfredl/nvim-miniyank',
-        config = function()
-            vim.keymap.set('n', 'p', '<Plug>(miniyank-autoput)')
-            vim.keymap.set('n', 'P', '<Plug>(miniyank-autoPut)')
-            vim.keymap.set('n', '<leader>p', '<Plug>(miniyank-cycle)')
-            vim.keymap.set('n', '<leader>P', '<Plug>(miniyank-cycleback)')
-        end
+        opts = {}
     },
     {
         'dyng/ctrlsf.vim',
@@ -100,8 +59,12 @@ local plugins = {
         branch = 'master',
         config = function()
             vim.g.VM_maps = {
-                ["Skip Region"] = "s"
+                ["Skip Region"] = "s",
+                ["Undo"] = 'u',
+                ["Redo"] = '<C-r>',
             }
+            vim.keymap.set('n', '<C-S-j>', '<Plug>(VM-Add-Cursor-Down)')
+            vim.keymap.set('n', '<C-S-k>', '<Plug>(VM-Add-Cursor-Up)')
         end
     },
     'folke/neodev.nvim',
@@ -142,9 +105,45 @@ local plugins = {
                 -- Options go here
             })
         end,
-    }
+    },
+    { 'gbprod/yanky.nvim', config = function()
+        local actions = require("telescope.actions");
+        local mapping = require("yanky.telescope.mapping")
+        require("yanky").setup({
+            ring = {
+                storage = "memory",
+                cancel_event = "move"
+            },
+            system_clipboard = {
+                sync_with_ring = false
+            },
+            highlight = {
+                on_put = false,
+                on_yank = false,
+            },
+            picker = {
+                telescope = {
+                    mappings = {
+
+                        i = {
+                            ["<c-j>"] = actions.move_selection_next,
+                            ["<c-k>"] = actions.move_selection_previous,
+                            ["<c-d>"] = mapping.delete(),
+                            ["<c-p>"] = actions.nop
+                        }
+                    }
+                }
+            }
+        })
+        vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
+        vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
+        vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
+        vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+        vim.keymap.set("n", "<leader>P", ":Telescope yank_history<cr>")
+        vim.keymap.set("n", "<leader>p", "<Plug>(YankyCycleForward)")
+        vim.keymap.set("n", "<leader>n", "<Plug>(YankyCycleBackward)")
+        vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)") -- do not go back to the start of the yanked text
+    end },
 }
 
-local ret = _.merge_list(autoplugins, plugins)
-
-return ret
+return plugins

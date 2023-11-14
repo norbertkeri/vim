@@ -5,11 +5,7 @@ local plugins = {
     { 'folke/trouble.nvim', opts = {} },
     { 'numToStr/Comment.nvim', opts = {} },
     { 'j-hui/fidget.nvim',
-        opts = {
-            text = {
-                spinner = "moon"
-            }
-        }
+        opts = {}
     },
     {
         "folke/flash.nvim",

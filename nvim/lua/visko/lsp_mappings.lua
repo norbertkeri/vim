@@ -28,8 +28,36 @@ function M.setup_lsp_keymaps(lspclient, bufnr)
     bufmap('n', 'gr', vim.lsp.buf.rename)
     bufmap('n', 'ge', vim.diagnostic.open_float)
 
-    if lspclient.name == "rust_analyzer" then
-        bufmap('n', '<leader>d', ':RustOpenExternalDocs<cr>')
+    if lspclient.name == "rust-analyzer" then
+        bufmap('n', '<leader>d', ':RustLsp externalDocs')
+    end
+end
+
+local lang_settings = {
+    ["rust-analyzer"] = {
+        autoformat = true,
+        inlayHints = true
+    }
+}
+
+function M.on_attach(client, bufnr)
+    if client.name == "pyright" then
+        client.server_capabilities.completionProvider = false
+    end
+
+    if client.server_capabilities.documentSymbolProvider then
+        local navic = require("nvim-navic")
+        navic.attach(client, bufnr)
+    end
+
+    if lang_settings[client.name] and lang_settings[client.name]["inlayHints"] then
+        local lsp_hints = require("lsp-inlayhints")
+        lsp_hints.on_attach(client, bufnr)
+        lsp_hints.show()
+    end
+
+
+    if client.server_capabilities.documentFormattingProvider and lang_settings[client.name] and lang_settings[client.name]["autoformat"] then
         vim.cmd([[
             augroup LspFormat
             autocmd! * <buffer>

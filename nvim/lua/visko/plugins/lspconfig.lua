@@ -93,79 +93,15 @@ local setup_lspconfig = function()
                 }
             }
         },
-        rust_analyzer = {
-            tools = {
-                autoSetHints = true,
-                hover_with_actions = false,
-                inlay_hints = {
-                    show_parameter_hints = true,
-                    parameter_hints_prefix = "",
-                    other_hints_prefix = "",
-                },
-            },
-            server = {
-                settings = {
-                    ["rust-analyzer"] = {
-                        diagnostics = {
-                            disabled = {"incorrect-ident-case"},
-                        },
-                        completion = {
-                            postfix = {
-                                enable = false
-                            }
-                        },
-                        checkOnSave = {
-                            command = "clippy"
-                        },
-                        procMacro = {
-                            enable = true
-                        },
-                        inlayHints = {
-                            bindingModeHints = {
-                                enable = true
-                            },
-                            expressionAdjustmentHints = {
-                                enable = true
-                            },
-                            closureReturnTypeHints = {
-                                enable = true
-                            },
-                            lifetimeElisionHints = {
-                                enable = true
-                            },
-                            typeHints = {
-                                hideClosureInitialization = true
-                            },
-                        }
-                    }
-                }
-            }
-        },
+        -- According to the rustacean.nvim documentation, this should not be called because it will cause conflicts
+        --rust_analyzer = {},
         terraformls = {
         }
     }
 
-    local autoformat = false
-
-    local navic = require("nvim-navic")
     local on_attach = function(client, bufnr)
         require('visko.lsp_mappings').setup_lsp_keymaps(client, bufnr)
-
-        if client.name == "pyright" then
-            client.server_capabilities.completionProvider = false
-        end
-
-        if client.server_capabilities.documentSymbolProvider then
-            navic.attach(client, bufnr)
-        end
-        if client.server_capabilities.documentFormattingProvider and autoformat then
-            vim.cmd([[
-                augroup LspFormat
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-                augroup END
-            ]])
-        end
+        require('visko.lsp_mappings').on_attach(client, bufnr)
     end
 
     local common_options = {
@@ -177,15 +113,8 @@ local setup_lspconfig = function()
     }
 
     for server, opts in pairs(servers) do
-        if server == "rust_analyzer" then
-            -- rust-tools is special, and expects lsp server related configuration in the "server" key (everything else just uses the top level table)
-            opts.server = vim.tbl_deep_extend("force", {}, common_options, opts.server or {})
-            require("rust-tools").setup(opts)
-        else
-            opts = vim.tbl_deep_extend("force", {}, common_options, opts or {})
-            lspconfig[server].setup(opts)
-        end
-
+        opts = vim.tbl_deep_extend("force", {}, common_options, opts or {})
+        lspconfig[server].setup(opts)
     end
 
 end
@@ -204,10 +133,79 @@ return {
     'hrsh7th/vim-vsnip',
     'hrsh7th/vim-vsnip-integ',
     {
+        'lvimuser/lsp-inlayhints.nvim',
+        opts = {}
+    },
+    {
         'hrsh7th/cmp-vsnip',
         config = setup_cmp
     },
-    'simrat39/rust-tools.nvim',
+    {
+    'mrcjkb/rustaceanvim',
+        version = "^3",
+        ft = {"rust"},
+        config = function(_, opts)
+            vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
+        end,
+        opts = {
+            -- tools = {
+            --     autoSetHints = true,
+            --     hover_with_actions = false,
+            --     inlay_hints = {
+            --         show_parameter_hints = true,
+            --         parameter_hints_prefix = "",
+            --         other_hints_prefix = "",
+            --     },
+            -- },
+            server = {
+                on_attach = function(client, bufnr)
+                    require('visko.lsp_mappings').setup_lsp_keymaps(client, bufnr)
+                    require('visko.lsp_mappings').on_attach(client, bufnr)
+                end,
+                settings = {
+                    ["rust-analyzer"] = {
+                        diagnostics = {
+                            disabled = {"incorrect-ident-case"},
+                        },
+                        completion = {
+                            postfix = {
+                                enable = false
+                            }
+                        },
+                        checkOnSave = {
+                            command = "clippy"
+                        },
+                        procMacro = {
+                            enable = true,
+                            ignored = {
+                                ["async-trait"] = { "async_trait" },
+                                ["napi-derive"] = { "napi" },
+                                ["async-recursion"] = { "async_recursion" },
+                            }
+                        },
+                        inlayHints = {
+                            bindingModeHints = {
+                                enable = true
+                            },
+                            -- expressionAdjustmentHints = {
+                            --     enable = true
+                            -- },
+                            closureReturnTypeHints = {
+                                enable = true
+                            },
+                            lifetimeElisionHints = {
+                                enable = true
+                            },
+                            typeHints = {
+                                hideClosureInitialization = true
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    },
+    --'simrat39/rust-tools.nvim',
     {
         'ray-x/lsp_signature.nvim',
         config = function()

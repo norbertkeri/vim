@@ -29,6 +29,7 @@ if vim.env.TERM == 'xterm-kitty' then
   vim.cmd([[autocmd UILeave * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[<1u") | endif]])
 end
 
+-- do not save empty lines into the paste buffer
 local function delete_special()
   if vim.api.nvim_get_current_line():match("^%s*$") then
     return "\"_dd"

@@ -10,12 +10,25 @@ return {
         vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
         vim.api.nvim_set_keymap("n", "_", ":Neotree float reveal_force_cwd<cr>", { noremap = true })
         require("neo-tree").setup({
+            use_default_mappings = false,
             source_selector = {
                 winbar = true,
                 statusline = true
             },
             close_if_last_window = true,
             popup_border_style = "rounded",
+            git_status = {
+            window = {
+                    position = "float",
+                    mappings = {
+                        ["A"]  = "git_add_all",
+                        ["u"] = "git_unstage_file",
+                        ["a"] = "git_add_file",
+                        ["r"] = "git_revert_file",
+                        ["c"] = "git_commit",
+                    }
+                }
+            },
             window = {
                 popup = {
                     position = { col = "100%", row = "2" },
@@ -39,7 +52,7 @@ return {
                     ["c"] = "close_node",
                     ["C"] = "close_all_nodes",
                     --["Z"] = "expand_all_nodes",
-                    ["a"] = { 
+                    ["a"] = {
                         "add",
                         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
                         config = {
@@ -47,7 +60,6 @@ return {
                         }
                     },
                     ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
-                    ["<c-d>"] = "drag_and_drop",
                     ["d"] = "delete",
                     ["r"] = "rename",
                     ["y"] = "copy_to_clipboard",
@@ -60,6 +72,14 @@ return {
                     ["R"] = "refresh",
                     ["?"] = "show_help",
                     ["<tab>"] = "next_source",
+                    ["O"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "O" }},
+                    ["Oc"] = { "order_by_created", nowait = false },
+                    ["Od"] = { "order_by_diagnostics", nowait = false },
+                    ["Og"] = { "order_by_git_status", nowait = false },
+                    ["Om"] = { "order_by_modified", nowait = false },
+                    ["On"] = { "order_by_name", nowait = false },
+                    ["Os"] = { "order_by_size", nowait = false },
+                    ["Ot"] = { "order_by_type", nowait = false },
                 }
             },
             filesystem = {
@@ -88,8 +108,7 @@ return {
                 },
                 window = {
                     mappings = {
-                        ["gn"] = "prev_git_modified",
-                        ["gp"] = "next_git_modified",
+                        ["<c-d>"] = "drag_and_drop",
                     }
                 }
             }

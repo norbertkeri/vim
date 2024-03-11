@@ -41,6 +41,7 @@ end
 
 return {
     'challenger-deep-theme/vim',
+    'maxmx03/fluoromachine.nvim',
     'ayu-theme/ayu-vim',
     'jaredgorski/spacecamp',
     'trapd00r/neverland-vim-theme',

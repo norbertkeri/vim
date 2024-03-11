@@ -13,8 +13,6 @@ local plugins = {
         opts = {
             modes = {
                 char = {
-                    autohide = true,
-                    -- multi_line = false,
                     highlight = { backdrop = false }
                 }
             }

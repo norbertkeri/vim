@@ -43,6 +43,7 @@ return {
                 },
                 mappings = {
                     ["o"] = { "open" },
+                    ["<cr>"] = { "open" },
                     ["u"] = { "navigate_up" },
                     ["P"] = { "toggle_preview", config = { use_float = false } },
                     ["s"] = "open_split",

@@ -51,9 +51,10 @@ function M.on_attach(client, bufnr)
     end
 
     if lang_settings[client.name] and lang_settings[client.name]["inlayHints"] then
-        local lsp_hints = require("lsp-inlayhints")
-        lsp_hints.on_attach(client, bufnr)
-        lsp_hints.show()
+        -- local lsp_hints = require("lsp-inlayhints")
+        -- lsp_hints.on_attach(client, bufnr)
+        -- lsp_hints.show()
+        --vim.lsp.inlay_hint.enable(bufnr, true)
     end
 
 

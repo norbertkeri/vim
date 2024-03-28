@@ -57,7 +57,7 @@ local config = function()
             end),
             line.spacer(),
             -- shows list of windows in tab
-            windows_in_tab,
+            --windows_in_tab,
             hl = theme.fill,
         }
     end, {

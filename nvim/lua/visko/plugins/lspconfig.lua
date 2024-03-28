@@ -132,10 +132,10 @@ return {
     'hrsh7th/cmp-buffer',
     'hrsh7th/vim-vsnip',
     'hrsh7th/vim-vsnip-integ',
-    {
-        'lvimuser/lsp-inlayhints.nvim',
-        opts = {}
-    },
+    -- {
+    --     'lvimuser/lsp-inlayhints.nvim',
+    --     opts = {}
+    -- },
     {
         'hrsh7th/cmp-vsnip',
         config = setup_cmp

@@ -4,6 +4,7 @@ local plugins = {
     { 'lewis6991/gitsigns.nvim', opts = {} },
     { 'folke/trouble.nvim', opts = {} },
     { 'numToStr/Comment.nvim', opts = {} },
+    { 'eldritch-theme/eldritch.nvim', opts = {} },
     { 'j-hui/fidget.nvim',
         opts = {}
     },

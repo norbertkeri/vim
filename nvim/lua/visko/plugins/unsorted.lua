@@ -7,6 +7,21 @@ local plugins = {
     { 'j-hui/fidget.nvim',
         opts = {}
     },
+    { 'kylechui/nvim-surround', opts = {
+        keymaps = {
+            insert = "<C-s>",
+            insert_line = "<C-S>",
+            normal = "yS",
+            normal_cur = "ySc",
+            normal_line = "ySl",
+            normal_cur_line = "ySL",
+            visual = "S",
+            visual_line = "gS",
+            delete = "dS",
+            change = "cS",
+            change_line = "<nop>",
+        },
+    } },
     {
         "folke/flash.nvim",
         event = "VeryLazy",
@@ -19,7 +34,7 @@ local plugins = {
         },
         keys = {
             { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-            { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            --{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
             { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
             { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },

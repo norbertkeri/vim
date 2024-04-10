@@ -29,7 +29,7 @@ function M.setup_lsp_keymaps(lspclient, bufnr)
     bufmap('n', 'ge', vim.diagnostic.open_float)
 
     if lspclient.name == "rust-analyzer" then
-        bufmap('n', '<leader>d', ':RustLsp externalDocs')
+        bufmap('n', '<leader>d', ':RustLsp externalDocs<cr>')
     end
 end
 

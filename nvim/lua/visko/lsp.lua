@@ -1,8 +1,8 @@
 local signs = {
-    DiagnosticSignError =" ",
-    DiagnosticSignWarn = " ",
-    DiagnosticSignInfo = " ",
-    DiagnosticSignHint = ""
+    DiagnosticSignError = " ",
+    DiagnosticSignWarn = " ",
+    DiagnosticSignInfo = " ",
+    DiagnosticSignHint = " "
 }
 
 for k, v in pairs(signs) do
@@ -61,3 +61,5 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 
 vim.opt.completeopt = "menuone,noselect,noinsert"
 vim.opt.shortmess:append("c")
+
+vim.lsp.inlay_hint.enable()

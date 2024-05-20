@@ -17,9 +17,8 @@ function M.setup_lsp_keymaps(lspclient, bufnr)
     bufmap('n', '<leader>n', vim.diagnostic.goto_next)
     bufmap('n', '<leader>e', vim.diagnostic.goto_prev)
 
-    bufmap({'n', 'v'}, 'ga', vim.lsp.buf.code_action)
     bufmap('n', 'K', vim.lsp.buf.hover)
-    bufmap('n', '<leader>i', ':TroubleToggle<cr>')
+    bufmap('n', '<leader>i', ':Trouble diagnostics toggle<cr>')
 
     bufmap('n', 'gd', vim.lsp.buf.definition)
     bufmap('n', 'gD', vim.lsp.buf.implementation)
@@ -27,16 +26,13 @@ function M.setup_lsp_keymaps(lspclient, bufnr)
     bufmap('n', 'gR', function() vim.lsp.buf.references({ includeDeclaration = false }) end)
     bufmap('n', 'gr', vim.lsp.buf.rename)
     bufmap('n', 'ge', vim.diagnostic.open_float)
-
-    if lspclient.name == "rust-analyzer" then
-        bufmap('n', '<leader>d', ':RustLsp externalDocs<cr>')
-    end
+    bufmap({'n', 'v'}, 'ga', vim.lsp.buf.code_action)
+    bufmap('n', '<leader>H', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 end
 
 local lang_settings = {
     ["rust-analyzer"] = {
         autoformat = true,
-        inlayHints = true
     }
 }
 
@@ -49,13 +45,6 @@ function M.on_attach(client, bufnr)
         local navic = require("nvim-navic")
         navic.attach(client, bufnr)
     end
-
-    if lang_settings[client.name] and lang_settings[client.name]["inlayHints"] then
-        local lsp_hints = require("lsp-inlayhints")
-        lsp_hints.on_attach(client, bufnr)
-        lsp_hints.show()
-    end
-
 
     if client.server_capabilities.documentFormattingProvider and lang_settings[client.name] and lang_settings[client.name]["autoformat"] then
         vim.cmd([[

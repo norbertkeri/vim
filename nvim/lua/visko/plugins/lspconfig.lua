@@ -30,6 +30,7 @@ local setup_cmp = function()
 
         -- Installed sources
         sources = cmp.config.sources({
+            { name = "crates" },
             { name = 'nvim_lsp' },
             { name = 'nvim_lsp_signature_help'},
             { name = 'vsnip' }, -- Not sure I actually use snippets
@@ -133,30 +134,18 @@ return {
     'hrsh7th/vim-vsnip',
     'hrsh7th/vim-vsnip-integ',
     {
-        'lvimuser/lsp-inlayhints.nvim',
-        opts = {}
-    },
-    {
         'hrsh7th/cmp-vsnip',
         config = setup_cmp
     },
     {
     'mrcjkb/rustaceanvim',
-        version = "^3",
+        lazy = false,
+        version = "^4",
         ft = {"rust"},
         config = function(_, opts)
             vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
         end,
         opts = {
-            -- tools = {
-            --     autoSetHints = true,
-            --     hover_with_actions = false,
-            --     inlay_hints = {
-            --         show_parameter_hints = true,
-            --         parameter_hints_prefix = "",
-            --         other_hints_prefix = "",
-            --     },
-            -- },
             server = {
                 on_attach = function(client, bufnr)
                     require('visko.lsp_mappings').setup_lsp_keymaps(client, bufnr)
@@ -164,10 +153,16 @@ return {
                 end,
                 settings = {
                     ["rust-analyzer"] = {
+                        -- cargo = {
+                        --     features = {"sqlite"}
+                        -- },
                         diagnostics = {
                             disabled = {"incorrect-ident-case"},
                         },
                         completion = {
+                            -- fullFunctionSignatures = {
+                            --     enable = true
+                            -- },
                             postfix = {
                                 enable = false
                             }
@@ -177,11 +172,6 @@ return {
                         },
                         procMacro = {
                             enable = true,
-                            ignored = {
-                                ["async-trait"] = { "async_trait" },
-                                ["napi-derive"] = { "napi" },
-                                ["async-recursion"] = { "async_recursion" },
-                            }
                         },
                         inlayHints = {
                             bindingModeHints = {

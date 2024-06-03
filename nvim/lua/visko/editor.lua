@@ -30,7 +30,7 @@ vim.opt.background = "dark"
 --set showcmd
 --set showmatch
 vim.opt.hidden = true
-vim.opt.fillchars = { vert = "│", fold = "-", eob = " ", diff = "╱" }
+vim.opt.fillchars = { horiz = " ", vert = "│", fold = "-", eob = " ", diff = "╱" }
 
 vim.opt.swapfile = false
 

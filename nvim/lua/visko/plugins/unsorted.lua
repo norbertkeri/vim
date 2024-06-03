@@ -2,7 +2,21 @@ local _ = require("visko.helpers")
 
 local plugins = {
     { 'lewis6991/gitsigns.nvim', opts = {} },
-    { 'folke/trouble.nvim', opts = {}, branch = "dev" },
+    { 'folke/trouble.nvim',
+        opts = {
+            auto_preview = false,
+            focus = true,
+            multiline = false,
+            modes = {
+                diagnostics = {
+                    groups = {
+                        { "filename", format = "{file_icon} {basename:Title} {count}" },
+                    },
+                },
+            },
+
+        }
+    },
     { 'eldritch-theme/eldritch.nvim', opts = {} },
     { 'j-hui/fidget.nvim',
         opts = {}

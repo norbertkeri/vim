@@ -2,6 +2,18 @@ local _ = require("visko.helpers")
 
 local plugins = {
     { 'lewis6991/gitsigns.nvim', opts = {} },
+    {
+        'MagicDuck/grug-far.nvim',
+        config = function()
+            local grug = require('grug-far');
+            local opts = { prefills = { flags = '--smart-case' } };
+
+            vim.keymap.set('n', '<leader>F', function() grug.grug_far() end);
+            vim.keymap.set('n', '!', function() grug.grug_far({ startInInsertMode = false, prefills = { search = vim.fn.expand("<cword>") } }) end);
+            vim.keymap.set('v', '!', function() grug.with_visual_selection({ startInInsertMode = false }) end);
+            grug.setup(opts);
+        end
+    },
     { 'folke/trouble.nvim',
         opts = {
             auto_preview = false,
@@ -59,23 +71,6 @@ local plugins = {
         tag = 'v0.3.0',
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = {}
-    },
-    {
-        'dyng/ctrlsf.vim',
-        config = function()
-            -- Autofocus
-            vim.g.ctrlsf_auto_focus = { at = "start" }
-
-            vim.g.ctrlsf_mapping = {next = "n", prev = "N", vsplit = "v", split = "s", open = {"<cr>", "o"}, popen = "p", quit = "q"}
-
-            -- Search regexes by default
-            vim.g.ctrlsf_regex_pattern = 1
-            -- Only indent two lines, instead of 4 in search results
-            vim.g.ctrlsf_indent = 2
-            vim.keymap.set('n', '<leader>F', '<Plug>CtrlSFPrompt')
-            vim.keymap.set('n', '!', '<Plug>CtrlSFCwordExec')
-            vim.keymap.set('v', '!', '<Plug>CtrlSFVwordExec')
-        end
     },
     {
         'mg979/vim-visual-multi',

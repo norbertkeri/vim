@@ -51,6 +51,7 @@ return {
     { 'catppuccin/nvim', config = catppuccin },
     'devnnys/spaceodyssey.nvim',
     'rebelot/kanagawa.nvim',
+    { "diegoulloao/neofusion.nvim", priority = 1000 , config = true, opts = {} },
     {
         'EdenEast/nightfox.nvim',
         config = function()

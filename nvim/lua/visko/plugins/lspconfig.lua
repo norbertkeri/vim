@@ -1,3 +1,47 @@
+local completion_filters = {
+    rust = function(entry, _)
+        local hide = {
+            "color_eyre::owo_colors"
+        }
+        local item = entry:get_completion_item()
+        local import_path = vim.tbl_get(item, 'data', 'imports', 1, 'full_import_path')
+        for _, v in ipairs(hide) do
+            if import_path and string.find(import_path, v) then
+                return false
+            end
+        end
+        return true
+    end
+}
+
+local completion_kinds = {
+    Text = { 1, "" },
+    Method = { 2, "" },
+    Function = { 3, "" },
+    Constructor = { 4, "" },
+    Field = { 5, "" },
+    Variable = { 6, "" },
+    Class = { 7, '' },
+    Interface = { 8, "" },
+    Module = { 9, "" },
+    Property = { 10, "ﰠ" },
+    Unit = { 11, "" },
+    Value = { 12, "" },
+    Enum = { 13, "" },
+    Keyword = { 14, "" },
+    Snippet = { 15, "" },
+    Color = { 16, "" },
+    File = { 17, "" },
+    Reference = { 18, "" },
+    Folder = { 19, "" },
+    EnumMember = { 20, "" },
+    Constant = { 21, "" },
+    Struct = { 22, "" },
+    Event = { 23, "" },
+    Operator = { 24, '' },
+    TypeParameter = { 25, ' '},
+}
+
 local setup_cmp = function()
     local cmp = require'cmp'
     local documentation_window = cmp.config.window.bordered()
@@ -7,6 +51,24 @@ local setup_cmp = function()
         window = {
             completion = cmp.config.window.bordered(),
             documentation = documentation_window
+        },
+        formatting = {
+            fields = {"kind", "abbr", "menu"},
+            format = function(entry, vim_item)
+                vim_item.kind = (completion_kinds[vim_item.kind][2] or '') .. " "
+                -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- show icons with the name of the item kind
+
+                -- set a name for each source
+                vim_item.menu = ({
+                    buffer = "[Buffer]",
+                    nvim_lsp = "[LSP]",
+                    luasnip = "[Snippet]",
+                    nvim_lua = "[Lua]",
+                    latex_symbols = "[LaTeX]",
+                })[entry.source.name]
+
+                return vim_item
+            end,
         },
         snippet = {
             expand = function(args)
@@ -31,7 +93,13 @@ local setup_cmp = function()
         -- Installed sources
         sources = cmp.config.sources({
             { name = "crates" },
-            { name = 'nvim_lsp' },
+            { name = 'nvim_lsp', entry_filter = function(entry, ctx)
+                local filter = completion_filters[vim.bo.filetype]
+                if filter ~= nil then
+                    return filter(entry, ctx)
+                end
+                return true
+            end },
             { name = 'nvim_lsp_signature_help'},
             { name = 'vsnip' }, -- Not sure I actually use snippets
         }, {

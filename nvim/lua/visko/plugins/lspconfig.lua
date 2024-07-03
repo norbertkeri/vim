@@ -128,6 +128,7 @@ local setup_lspconfig = function()
         jedi_language_server = {},
         pyright = {},
         jsonls = {},
+        fish_lsp = {},
         lua_ls = {
             settings = {
                 Lua = {

@@ -40,7 +40,5 @@ vim.keymap.set('n', '<C-h>', '<C-w>h')
 -- Kitty supports distinguishing between c-i and tab, so we can map back <c-i> to "jump in"
 vim.keymap.set('n', '<C-i>', '<C-i>')
 
---[[
-nmap <F3> :tabnew ~/.vimrepository/vim/configs/local.vimrc<cr>
-nmap <F4> :tabnew ~/.vimrepository/nvim/lua/config/init.lua<cr>
-]]--
+-- Reindent the current line while in insert mode with c-i
+vim.keymap.set('i', '<C-i>', '<C-o>==<esc><C-o>I')

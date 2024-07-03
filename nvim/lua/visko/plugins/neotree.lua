@@ -42,6 +42,7 @@ return {
                     end
                 },
                 mappings = {
+                    ["."] = { "set_root" },
                     ["o"] = { "open" },
                     ["<cr>"] = { "open" },
                     ["u"] = { "navigate_up" },
@@ -81,6 +82,7 @@ return {
                     ["On"] = { "order_by_name", nowait = false },
                     ["Os"] = { "order_by_size", nowait = false },
                     ["Ot"] = { "order_by_type", nowait = false },
+                    ["h"] = "toggle_hidden"
                 }
             },
             filesystem = {

@@ -1,7 +1,20 @@
 local _ = require("visko.helpers")
 
 local plugins = {
-    { 'lewis6991/gitsigns.nvim', opts = {} },
+    { 'lewis6991/gitsigns.nvim', opts = {
+        on_attach = function(bufnr)
+            local gs = package.loaded.gitsigns;
+            local map = function(mode, lhs, rhs, opts)
+                opts = opts or {}
+                opts.buffer = bufnr
+                vim.keymap.set(mode, lhs, rhs, opts)
+            end
+            map("n", "<leader>J", gs.next_hunk)
+            map("n", "<leader>K", gs.prev_hunk)
+            map("o", "J", gs.prev_hunk)
+            map("o", "K", gs.prev_hunk)
+        end
+    } },
     {
         'MagicDuck/grug-far.nvim',
         config = function()

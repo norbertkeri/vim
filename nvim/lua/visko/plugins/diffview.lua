@@ -1,10 +1,13 @@
 return {
     { 'sindrets/diffview.nvim',
+        cmd = {"DiffviewOpen", "DiffviewClose", "DiffviewFileHistory"},
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
             local actions = require("diffview.actions")
             require("diffview").setup({
+                diff_binaries = false,
                 enhanced_diff_hl = true,
+                use_icons = true,
                 keymaps = {
                     view = {
                         -- keep tab as tabnext instead of jumping to next file

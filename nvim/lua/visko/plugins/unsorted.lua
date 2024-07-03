@@ -137,7 +137,7 @@ local plugins = {
         end,
     },
     "folke/neodev.nvim",
-    "wellle/targets.vim",
+    { "echasnovski/mini.ai", opts = {} },
     "mbbill/undotree",
     {
         "norcalli/nvim-colorizer.lua",

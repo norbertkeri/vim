@@ -206,72 +206,13 @@ return {
         config = setup_cmp
     },
     {
-    'mrcjkb/rustaceanvim',
-        lazy = false,
-        version = "^4",
-        ft = {"rust"},
-        config = function(_, opts)
-            vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
-        end,
-        opts = {
-            server = {
-                on_attach = function(client, bufnr)
-                    require('visko.lsp_mappings').setup_lsp_keymaps(client, bufnr)
-                    require('visko.lsp_mappings').on_attach(client, bufnr)
-                end,
-                settings = {
-                    ["rust-analyzer"] = {
-                        -- cargo = {
-                        --     features = {"sqlite"}
-                        -- },
-                        diagnostics = {
-                            disabled = {"incorrect-ident-case"},
-                        },
-                        completion = {
-                            -- fullFunctionSignatures = {
-                            --     enable = true
-                            -- },
-                            postfix = {
-                                enable = false
-                            }
-                        },
-                        checkOnSave = {
-                            command = "clippy"
-                        },
-                        procMacro = {
-                            enable = true,
-                        },
-                        inlayHints = {
-                            bindingModeHints = {
-                                enable = true
-                            },
-                            -- expressionAdjustmentHints = {
-                            --     enable = true
-                            -- },
-                            closureReturnTypeHints = {
-                                enable = true
-                            },
-                            lifetimeElisionHints = {
-                                enable = true
-                            },
-                            typeHints = {
-                                hideClosureInitialization = true
-                            },
-                        }
-                    }
-                }
-            }
-        }
-    },
-    --'simrat39/rust-tools.nvim',
-    {
         'ray-x/lsp_signature.nvim',
         config = function()
             require "lsp_signature".setup({
                 max_height = 60,
                 max_width = 120,
-                doc_lines = 40,
-                hint_enable = true,
+                doc_lines = 3,
+                hint_enable = false,
                 hint_prefix = "",
                 extra_trigger_chars = {"(", ","},
             })

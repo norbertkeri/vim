@@ -17,13 +17,15 @@ function M.setup_lsp_keymaps(lspclient, bufnr)
     bufmap("n", "<leader>e", vim.diagnostic.goto_prev)
 
     bufmap("n", "K", vim.lsp.buf.hover)
-    bufmap("n", "<leader>i", ":Trouble diagnostics toggle<cr>")
+    bufmap("n", "<leader>i", ":Trouble cascade toggle<cr>")
 
     bufmap("n", "gd", vim.lsp.buf.definition)
     bufmap("n", "gD", vim.lsp.buf.implementation)
     bufmap("n", "1gD", vim.lsp.buf.type_definition)
     bufmap("n", "gR", function()
-        vim.lsp.buf.references({ includeDeclaration = false })
+        require("trouble").open({
+            mode = "lsp_references",
+        })
     end)
     bufmap("n", "gr", vim.lsp.buf.rename)
     bufmap("n", "ge", vim.diagnostic.open_float)

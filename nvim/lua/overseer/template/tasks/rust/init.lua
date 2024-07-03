@@ -15,7 +15,7 @@ local curried_has_package = function(package)
     return {
         condition = function()
             return has_package(package)
-        end
+        end,
     }
 end
 
@@ -26,8 +26,8 @@ local sqlx = {
     condition = curried_has_package("sqlx"),
     builder = function()
         return {
-            cmd = {"sqlx"},
-            args = {"database", "reset", "-y"},
+            cmd = { "sqlx" },
+            args = { "database", "reset", "-y" },
         }
     end,
 }
@@ -37,8 +37,8 @@ local cargofix = {
     desc = "cargo:fix",
     builder = function()
         return {
-            cmd = {"cargo"},
-            args = {"fix", "--allow-dirty", "--allow-staged"},
+            cmd = { "cargo" },
+            args = { "fix", "--allow-dirty", "--allow-staged" },
         }
     end,
 }
@@ -47,17 +47,17 @@ local cargofmt = {
     desc = "cargo:fmt",
     builder = function()
         return {
-            cmd = {"cargo"},
-            args = {"fmt"},
+            cmd = { "cargo" },
+            args = { "fmt" },
         }
     end,
 }
 
 return {
     condition = {
-        callback = cargo_toml_exists
+        callback = cargo_toml_exists,
     },
     generator = function(search, cb)
-        cb({sqlx, cargofix, cargofmt})
-    end
+        cb({ sqlx, cargofix, cargofmt })
+    end,
 }

@@ -1,10 +1,10 @@
 return {
-    'nvim-neo-tree/neo-tree.nvim',
+    "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        "MunifTanjim/nui.nvim",
     },
     config = function()
         vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
@@ -13,21 +13,21 @@ return {
             use_default_mappings = false,
             source_selector = {
                 winbar = true,
-                statusline = true
+                statusline = true,
             },
             close_if_last_window = true,
             popup_border_style = "rounded",
             git_status = {
-            window = {
+                window = {
                     position = "float",
                     mappings = {
-                        ["A"]  = "git_add_all",
+                        ["A"] = "git_add_all",
                         ["u"] = "git_unstage_file",
                         ["a"] = "git_add_file",
                         ["r"] = "git_revert_file",
                         ["c"] = "git_commit",
-                    }
-                }
+                    },
+                },
             },
             window = {
                 popup = {
@@ -37,9 +37,9 @@ return {
                         local root_len = string.len(root_name) + 4
                         return {
                             width = math.max(root_len, 50),
-                            height = vim.o.lines - 6
+                            height = vim.o.lines - 6,
                         }
-                    end
+                    end,
                 },
                 mappings = {
                     ["."] = { "set_root" },
@@ -50,16 +50,14 @@ return {
                     ["s"] = "open_split",
                     ["v"] = "open_vsplit",
                     ["t"] = "open_tabnew",
-                    --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
                     ["c"] = "close_node",
                     ["C"] = "close_all_nodes",
-                    --["Z"] = "expand_all_nodes",
                     ["a"] = {
                         "add",
                         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
                         config = {
-                            show_path = "none" -- "none", "relative", "absolute"
-                        }
+                            show_path = "none", -- "none", "relative", "absolute"
+                        },
                     },
                     ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
                     ["d"] = "delete",
@@ -74,7 +72,7 @@ return {
                     ["R"] = "refresh",
                     ["?"] = "show_help",
                     ["<tab>"] = "next_source",
-                    ["O"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "O" }},
+                    ["O"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "O" } },
                     ["Oc"] = { "order_by_created", nowait = false },
                     ["Od"] = { "order_by_diagnostics", nowait = false },
                     ["Og"] = { "order_by_git_status", nowait = false },
@@ -82,8 +80,8 @@ return {
                     ["On"] = { "order_by_name", nowait = false },
                     ["Os"] = { "order_by_size", nowait = false },
                     ["Ot"] = { "order_by_type", nowait = false },
-                    ["h"] = "toggle_hidden"
-                }
+                    ["h"] = "toggle_hidden",
+                },
             },
             filesystem = {
                 bind_to_cwd = false,
@@ -97,15 +95,15 @@ return {
                 },
                 filtered_items = {
                     always_show = {
-                        ".gitignore"
+                        ".gitignore",
                     },
                     hide_dotfiles = false,
                     never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
                         ".DS_Store",
-                        "thumbs.db"
+                        "thumbs.db",
                     },
                     never_show_by_pattern = { -- uses glob style patterns
-                        "*.orig"
+                        "*.orig",
                     },
                     group_empty_dirs = false, -- when true, empty folders will be grouped together
                     use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
@@ -113,9 +111,9 @@ return {
                 window = {
                     mappings = {
                         ["<c-d>"] = "drag_and_drop",
-                    }
-                }
-            }
+                    },
+                },
+            },
         })
-    end
+    end,
 }

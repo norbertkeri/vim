@@ -1,8 +1,26 @@
 local setup = function()
-    require('nvim-treesitter.configs').setup {
-        ensure_installed = {"rust", "css", "dockerfile", "yaml", "fish", "html", "javascript", "json", "python", "php", "scss", "toml", "typescript", "hcl", "lua", "markdown", "markdown_inline"},
+    require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+            "rust",
+            "css",
+            "dockerfile",
+            "yaml",
+            "fish",
+            "html",
+            "javascript",
+            "json",
+            "python",
+            "php",
+            "scss",
+            "toml",
+            "typescript",
+            "hcl",
+            "lua",
+            "markdown",
+            "markdown_inline",
+        },
         indent = {
-            enable = true
+            enable = true,
         },
         highlight = {
             enable = true,
@@ -26,13 +44,13 @@ local setup = function()
                 node_incremental = "<cr>",
                 scope_incremental = "<tab>",
                 node_decremental = "<S-tab>",
-            }
-        }
-    }
+            },
+        },
+    })
 end
 
 return {
-    { 'nvim-treesitter/nvim-treesitter', config = setup, build = ":TSUpdate" },
-    'p00f/nvim-ts-rainbow',
-    'nvim-treesitter/nvim-treesitter-context'
+    { "nvim-treesitter/nvim-treesitter", config = setup, build = ":TSUpdate" },
+    "p00f/nvim-ts-rainbow",
+    "nvim-treesitter/nvim-treesitter-context",
 }

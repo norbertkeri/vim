@@ -1,1 +1,1 @@
-return {"tasks.rust"}
+return { "tasks.rust" }

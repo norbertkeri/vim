@@ -1,4 +1,4 @@
-vim.g.vsnip_snippet_dir = os.getenv('HOME') .. '/.vimrepository/snippets'
+vim.g.vsnip_snippet_dir = os.getenv("HOME") .. "/.vimrepository/snippets"
 
 vim.cmd([[
 " Expand

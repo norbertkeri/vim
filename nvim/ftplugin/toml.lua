@@ -1,4 +1,4 @@
-if vim.fn.expand('%:t') == 'Cargo.toml' then
+if vim.fn.expand("%:t") == "Cargo.toml" then
     local crates = require("crates")
     local opts = { silent = true }
 

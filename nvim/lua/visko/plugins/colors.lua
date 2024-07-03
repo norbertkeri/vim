@@ -35,32 +35,30 @@ local catppuccin = function()
             hop = false,
         },
     })
-
 end
 
-
 return {
-    'challenger-deep-theme/vim',
-    'maxmx03/fluoromachine.nvim',
-    'ayu-theme/ayu-vim',
-    'jaredgorski/spacecamp',
-    'trapd00r/neverland-vim-theme',
-    'morhetz/gruvbox',
-    'drewtempelmeyer/palenight.vim',
-    'folke/tokyonight.nvim',
-    { 'catppuccin/nvim', config = catppuccin },
-    'devnnys/spaceodyssey.nvim',
-    'rebelot/kanagawa.nvim',
-    { "diegoulloao/neofusion.nvim", priority = 1000 , config = true, opts = {} },
+    "challenger-deep-theme/vim",
+    "maxmx03/fluoromachine.nvim",
+    "ayu-theme/ayu-vim",
+    "jaredgorski/spacecamp",
+    "trapd00r/neverland-vim-theme",
+    "morhetz/gruvbox",
+    "drewtempelmeyer/palenight.vim",
+    "folke/tokyonight.nvim",
+    { "catppuccin/nvim", config = catppuccin },
+    "devnnys/spaceodyssey.nvim",
+    "rebelot/kanagawa.nvim",
+    { "diegoulloao/neofusion.nvim", priority = 1000, config = true, opts = {} },
     {
-        'EdenEast/nightfox.nvim',
+        "EdenEast/nightfox.nvim",
         config = function()
-            require('nightfox').setup({
+            require("nightfox").setup({
                 options = {
                     modules = {
                         cmp = true,
                         diagnostic = {
-                            enable = true
+                            enable = true,
                         },
                         fidget = true,
                         gitsigns = true,
@@ -68,12 +66,12 @@ return {
                         telescope = true,
                         treesitter = true,
                         native_lsp = true,
-                    }
-                }
+                    },
+                },
             })
-        end
+        end,
     },
-    'marko-cerovac/material.nvim',
-    'AlphaTechnolog/onedarker.nvim',
-    'mhartington/oceanic-next'
+    "marko-cerovac/material.nvim",
+    "AlphaTechnolog/onedarker.nvim",
+    "mhartington/oceanic-next",
 }

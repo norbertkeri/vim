@@ -1,7 +1,7 @@
 local _ = require("visko.helpers")
 
 local symbols = {
-    modified = '  ',
+    modified = "  ",
     -- readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
     -- unnamed = '[No Name]', -- Text to show for unnamed buffers.
     -- newfile = '[New]',     -- Text to show for newly created file before first write
@@ -10,26 +10,26 @@ local symbols = {
 local active_lsps = function()
     local clients = vim.lsp.get_clients({ bufnr = 0 })
     local result = _.map(clients, function(e)
-        return e['name']
+        return e["name"]
     end)
     return table.concat(result, ", ")
 end
 
 local filename_section = {
-    'filename',
-    file_status = true,      -- Displays file status (readonly status, modified status)
-    newfile_status = false,  -- Display new file status (new file means no write after created)
+    "filename",
+    file_status = true, -- Displays file status (readonly status, modified status)
+    newfile_status = false, -- Display new file status (new file means no write after created)
     path = 1,
-    shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+    shorting_target = 40, -- Shortens path to leave 40 spaces in the window
     -- for other components. (terrible name, any suggestions?)
-    symbols = symbols
+    symbols = symbols,
 }
 
 local tabs_section = {
-    'tabs',
+    "tabs",
     mode = 0,
     use_mode_colors = true,
-    symbols = symbols
+    symbols = symbols,
 }
 
 local navic_info = {
@@ -40,7 +40,7 @@ local navic_info = {
     cond = function()
         local navic = require("nvim-navic")
         return navic.is_available()
-    end
+    end,
 }
 
 local mydiag = {
@@ -65,32 +65,32 @@ local mydiag = {
     end,
     cond = function()
         return true
-    end
+    end,
 }
 
 local winbar_sections = {
-    lualine_a = {filename_section},
-    lualine_b = {'diagnostics', 'searchcount'},
-    lualine_c = {navic_info},
-    lualine_x = {active_lsps, 'encoding'},
-    lualine_y = {{'filetype', icon_only = true}},
-    lualine_z = {}
+    lualine_a = { filename_section },
+    lualine_b = { "diagnostics", "searchcount" },
+    lualine_c = { navic_info },
+    lualine_x = { active_lsps, "encoding" },
+    lualine_y = { { "filetype", icon_only = true } },
+    lualine_z = {},
 }
 
-local inactive_winbar_sections = vim.tbl_extend('force', winbar_sections, {
+local inactive_winbar_sections = vim.tbl_extend("force", winbar_sections, {
     lualine_c = {},
 })
 
 return {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     config = function()
         vim.opt.showtabline = 0
-        require('lualine').setup {
+        require("lualine").setup({
             options = {
                 icons_enabled = true,
-                theme = 'tokyonight',
-                component_separators = { left = '', right = ''},
-                section_separators = { left = '', right = ''},
+                theme = "tokyonight",
+                component_separators = { left = "", right = "" },
+                section_separators = { left = "", right = "" },
                 disabled_filetypes = {},
                 always_divide_middle = true,
                 globalstatus = true,
@@ -98,17 +98,15 @@ return {
             tabline = {},
             sections = {
                 lualine_a = { tabs_section },
-                lualine_b = { 'branch' }, -- diff
+                lualine_b = { "branch" }, -- diff
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = {'location'},
-                lualine_z = {'progress'},
+                lualine_y = { "location" },
+                lualine_z = { "progress" },
             },
             winbar = winbar_sections,
             inactive_winbar = inactive_winbar_sections,
-            extensions = {}
-        }
+            extensions = {},
+        })
     end,
-
 }
-

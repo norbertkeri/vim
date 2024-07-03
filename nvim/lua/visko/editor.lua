@@ -15,7 +15,29 @@ vim.opt.expandtab = true
 
 vim.opt.wildmenu = true
 vim.opt.wildmode = "list:longest"
-vim.opt.wildignore:append {"*.a", "*.o", "*.bmp", "*.png", "*.gif", "*.jpg", "*.jpeg", ".git", ".hg", ".svn", "*~", "*.swp", "*.tmp", "*/.git/*", "*/.hg/*", "*/.svn/*", "app/cache/*", "app/logs", ".sass-cache", "node_modules", "web/built/*" }
+vim.opt.wildignore:append({
+    "*.a",
+    "*.o",
+    "*.bmp",
+    "*.png",
+    "*.gif",
+    "*.jpg",
+    "*.jpeg",
+    ".git",
+    ".hg",
+    ".svn",
+    "*~",
+    "*.swp",
+    "*.tmp",
+    "*/.git/*",
+    "*/.hg/*",
+    "*/.svn/*",
+    "app/cache/*",
+    "app/logs",
+    ".sass-cache",
+    "node_modules",
+    "web/built/*",
+})
 
 -- Search related stuff
 vim.opt.ignorecase = true
@@ -69,7 +91,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 300
 
 vim.opt.diffopt:append("internal,algorithm:patience")
-
 
 -- Preview replace commands in a split window
 vim.opt.inccommand = "split"

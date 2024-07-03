@@ -1,1 +1,1 @@
-require('visko')
+require("visko")

@@ -1,5 +1,5 @@
 return {
-    'voldikss/vim-floaterm',
+    "voldikss/vim-floaterm",
     config = function()
         --Check this: vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
         vim.cmd([[
@@ -7,5 +7,5 @@ return {
             nnoremap <silent> <C-t>   :FloatermToggle common<CR>
             tnoremap <silent> <C-t>   <C-\><C-n>:FloatermToggle common<CR>
         ]])
-    end
+    end,
 }

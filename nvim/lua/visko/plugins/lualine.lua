@@ -81,10 +81,18 @@ local inactive_winbar_sections = vim.tbl_extend("force", winbar_sections, {
     lualine_c = {},
 })
 
+local project_root = function()
+    local dot_git_path = vim.fn.finddir(".git", ".;")
+    if dot_git_path ~= "" then
+        return vim.fn.fnamemodify(dot_git_path, ":p:h:h:t")
+    end
+end
+
 return {
     "nvim-lualine/lualine.nvim",
     config = function()
         vim.opt.showtabline = 0
+        local arrow = require("arrow.statusline")
         require("lualine").setup({
             options = {
                 icons_enabled = true,
@@ -98,11 +106,16 @@ return {
             tabline = {},
             sections = {
                 lualine_a = { tabs_section },
-                lualine_b = { "branch" }, -- diff
+                lualine_b = {
+                    "branch",
+                    function()
+                        return arrow.text_for_statusline_with_icons()
+                    end,
+                },
                 lualine_c = {},
                 lualine_x = {},
                 lualine_y = { "location" },
-                lualine_z = { "progress" },
+                lualine_z = { "progress", project_root },
             },
             winbar = winbar_sections,
             inactive_winbar = inactive_winbar_sections,

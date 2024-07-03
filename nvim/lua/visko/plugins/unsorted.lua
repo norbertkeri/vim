@@ -246,6 +246,18 @@ local plugins = {
             },
         },
     },
+    {
+        "otavioschwanck/arrow.nvim",
+        opts = {
+            show_icons = true,
+            leader_key = "<f2>", -- Recommended to be a single key
+            buffer_leader_key = "<f3>", -- Per Buffer Mappings
+            global_bookmarks = true,
+            mappings = {
+                open_horizontal = "s",
+            },
+        },
+    },
 }
 
 return plugins

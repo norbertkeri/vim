@@ -99,8 +99,14 @@ local plugins = {
             },
         },
     },
-    { "eldritch-theme/eldritch.nvim", opts = {} },
-    { "j-hui/fidget.nvim", opts = {} },
+    {
+        "eldritch-theme/eldritch.nvim",
+        opts = {}
+    },
+    {
+        "j-hui/fidget.nvim",
+        opts = {}
+    },
     {
         "kylechui/nvim-surround",
         opts = {
@@ -172,19 +178,15 @@ local plugins = {
         opts = {},
     },
     {
-        "mg979/vim-visual-multi",
-        branch = "master",
-        config = function()
-            vim.g.VM_maps = {
-                ["Skip Region"] = "s",
-                ["Undo"] = "u",
-                ["Redo"] = "<C-r>",
-            }
-
-            local map = require("visko.helpers").vim.mapkey
-            map("n", "<C-S-k>", "<Plug>(VM-Add-Cursor-Up)", "Add mutlticursor up")
-            map("n", "<C-S-j>", "<Plug>(VM-Add-Cursor-Down)", "Add multicursor down")
-        end,
+        "brenton-leighton/multiple-cursors.nvim",
+        version = "*", -- Use the latest tagged version
+        opts = {},     -- This causes the plugin setup function to be called
+        keys = {
+            { "<C-S-j>", "<Cmd>MultipleCursorsAddDown<CR>",          mode = { "n", "x" }, desc = "Add cursor and move down" },
+            { "<C-S-k>", "<Cmd>MultipleCursorsAddUp<CR>",            mode = { "n", "x" }, desc = "Add cursor and move up" },
+            { "<C-n>",   "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" }, desc = "Add cursor and jump to next cword" },
+            { "<C-d>",   "<Cmd>MultipleCursorsJumpNextMatch<CR>",    mode = { "n", "x" }, desc = "Jump to next cword" },
+        },
     },
     "folke/neodev.nvim",
     { "echasnovski/mini.ai", opts = {} },
@@ -268,8 +270,8 @@ local plugins = {
         "otavioschwanck/arrow.nvim",
         opts = {
             show_icons = true,
-            leader_key = "<f2>", -- Recommended to be a single key
-            buffer_leader_key = "<f3>", -- Per Buffer Mappings
+            leader_key = "<f2>",
+            buffer_leader_key = "<f3>",
             global_bookmarks = true,
             mappings = {
                 open_horizontal = "s",

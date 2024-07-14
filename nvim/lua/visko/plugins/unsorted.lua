@@ -1,20 +1,49 @@
 local _ = require("visko.helpers")
-
 local plugins = {
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            preset = "modern",
+            keys = {
+                scroll_up = "<c-b>",
+                scroll_down = "<c-f>",
+            },
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show({ global = false })
+                end,
+                desc = "Buffer Local Keymaps (which-key)",
+            },
+        },
+    },
     {
         "lewis6991/gitsigns.nvim",
         opts = {
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
-                local map = function(mode, lhs, rhs, opts)
-                    opts = opts or {}
-                    opts.buffer = bufnr
-                    vim.keymap.set(mode, lhs, rhs, opts)
-                end
-                map("n", "<leader>J", gs.next_hunk)
-                map("n", "<leader>K", gs.prev_hunk)
-                map("o", "J", gs.prev_hunk)
-                map("o", "K", gs.prev_hunk)
+                local wk = package.loaded["which-key"]
+                local map = require("visko.helpers").vim.create_bufmap(bufnr)
+                wk.add({
+                    {
+                        "<leader>D",
+                        desc = "Diff hunk related movement",
+                        group = "gitsigns",
+                        mode = "n",
+                        buffer = bufnr,
+                    },
+                    { "D", desc = "Diff hunk related movement", group = "gitsigns", mode = "o", buffer = bufnr },
+                })
+                map("n", "<leader>Dj", gs.next_hunk, "Next hunk")
+                map("n", "<leader>Dk", gs.prev_hunk, "Prev hunk")
+                map("o", "Dj", gs.prev_hunk, "Next hunk")
+                map("o", "Dk", gs.prev_hunk, "Prev hunk")
             end,
         },
     },
@@ -23,17 +52,19 @@ local plugins = {
         config = function()
             local grug = require("grug-far")
             local opts = { prefills = { flags = "--smart-case" } }
-
-            vim.keymap.set("n", "<leader>F", function()
-                grug.grug_far()
-            end)
-            vim.keymap.set("n", "!", function()
-                grug.grug_far({ startInInsertMode = false, prefills = { search = vim.fn.expand("<cword>") } })
-            end)
-            vim.keymap.set("v", "!", function()
-                grug.with_visual_selection({ startInInsertMode = false })
-            end)
             grug.setup(opts)
+
+            local map = require("visko.helpers").vim.mapkey
+
+            map("n", "<leader>F", function()
+                grug.grug_far()
+            end, "Grug far")
+            map("n", "!",
+                function() grug.grug_far({ startInInsertMode = false, prefills = { search = vim.fn.expand("<cword>") } }) end,
+                "Grug far current word")
+            map("v", "!", function()
+                grug.with_visual_selection({ startInInsertMode = false })
+            end, "Grug far current selection")
         end,
     },
     {
@@ -149,8 +180,10 @@ local plugins = {
                 ["Undo"] = "u",
                 ["Redo"] = "<C-r>",
             }
-            vim.keymap.set("n", "<C-S-j>", "<Plug>(VM-Add-Cursor-Down)")
-            vim.keymap.set("n", "<C-S-k>", "<Plug>(VM-Add-Cursor-Up)")
+
+            local map = require("visko.helpers").vim.mapkey
+            map("n", "<C-S-k>", "<Plug>(VM-Add-Cursor-Up)", "Add mutlticursor up")
+            map("n", "<C-S-j>", "<Plug>(VM-Add-Cursor-Down)", "Add multicursor down")
         end,
     },
     "folke/neodev.nvim",
@@ -197,6 +230,7 @@ local plugins = {
         config = function()
             local actions = require("telescope.actions")
             local mapping = require("yanky.telescope.mapping")
+            local map = require("visko.helpers").vim.mapkey
             require("yanky").setup({
                 ring = {
                     storage = "memory",
@@ -212,7 +246,6 @@ local plugins = {
                 picker = {
                     telescope = {
                         mappings = {
-
                             i = {
                                 ["<c-j>"] = actions.move_selection_next,
                                 ["<c-k>"] = actions.move_selection_previous,
@@ -223,14 +256,12 @@ local plugins = {
                     },
                 },
             })
-            vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-            vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-            vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-            vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
-            vim.keymap.set("n", "<leader>P", ":Telescope yank_history<cr>")
-            vim.keymap.set("n", "<leader>p", "<Plug>(YankyCycleForward)")
-            vim.keymap.set("n", "<leader>n", "<Plug>(YankyCycleBackward)")
-            vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)") -- do not go back to the start of the yanked text
+            map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", "Put")
+            map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", "Put before")
+            map("n", "<leader>P", ":Telescope yank_history<cr>", "Telescope yank history")
+            map("n", "<leader>p", "<Plug>(YankyCycleForward)", "Put next")
+            map("n", "<leader>n", "<Plug>(YankyCycleBackward)", "Put prev")
+            map({ "n", "x" }, "y", "<Plug>(YankyYank)", "Yank") -- do not go back to the start of the yanked text
         end,
     },
     {

@@ -1,4 +1,6 @@
-local M = {}
+local M = {
+    vim = {},
+}
 
 function M.merge_list(l1, l2)
     local result = {}
@@ -24,6 +26,23 @@ function M.any(array, predicate)
         if predicate(v) then
             return v
         end
+    end
+end
+
+function M.vim.mapkey(mode, lhs, rhs, desc, opts)
+    opts = opts or {}
+    if opts.silent ~= nil then
+        opts.silent = true
+    end
+    opts.desc = desc
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+function M.vim.create_bufmap(bufnr)
+    return function(mode, lhs, rhs, desc, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        M.vim.mapkey(mode, lhs, rhs, desc, opts)
     end
 end
 

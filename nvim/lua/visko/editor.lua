@@ -1,3 +1,5 @@
+local map = require("visko.helpers").vim.mapkey
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
@@ -97,7 +99,6 @@ vim.opt.inccommand = "split"
 
 -- Map c-x c-b to autocomplete the list of open buffers
 vim.cmd([[
-inoremap <c-x><c-b> <c-r>=ListBuffers()<cr>
 function! ListBuffers()
   let buffers = getbufinfo({'buflisted': 1, 'bufloaded': 1})
   let bufnames = map(map(buffers, 'v:val.name'), 'substitute(v:val, getcwd(), "", "")')
@@ -105,6 +106,8 @@ function! ListBuffers()
   return ''
 endfunction
 ]])
+
+map("i", "<c-x><c-b>", "<c-r>=ListBuffers()<cr>", "Complete open buffers")
 
 -- Automatically create directories on save
 vim.cmd([[

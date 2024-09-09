@@ -14,6 +14,22 @@ local completion_filters = {
     end,
 }
 
+local formatters = {
+    rust = function(entry, vim_item)
+        vim.inspect(vim_item)
+        if vim_item.kind == "Method" or vim_item.kind == "Function" then
+            if vim_item.menu ~= nil then
+                -- Rearrange hints that look like "(use xyz)fn(x, y, z)" to "fn(x, y, z) (use xyz)"
+                local _, _, path, rest = string.find(vim_item.menu, "^ %(%w+ ([%w:]-)%)(.*)$")
+                if path ~= nil then
+                    vim_item.menu = rest .. " (" .. path .. ")"
+                end
+            end
+        end
+        return vim_item
+    end
+}
+
 local completion_kinds = {
     Text = { 1, "" },
     Method = { 2, "" },
@@ -55,18 +71,12 @@ local setup_cmp = function()
         formatting = {
             fields = { "kind", "abbr", "menu" },
             format = function(entry, vim_item)
+                local formatter = formatters[vim.bo.filetype]
+                if formatter ~= nil then
+                    vim_item = formatter(entry, vim_item)
+                end
+
                 vim_item.kind = (completion_kinds[vim_item.kind][2] or "") .. " "
-                -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- show icons with the name of the item kind
-
-                -- set a name for each source
-                vim_item.menu = ({
-                    buffer = "[Buffer]",
-                    nvim_lsp = "[LSP]",
-                    luasnip = "[Snippet]",
-                    nvim_lua = "[Lua]",
-                    latex_symbols = "[LaTeX]",
-                })[entry.source.name]
-
                 return vim_item
             end,
         },
@@ -166,9 +176,9 @@ local setup_lspconfig = function()
         yamlls = {
             settings = {
                 yaml = {
-                    schemas = {
-                        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-                    },
+                    -- schemas = {
+                    --     ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                    -- },
                 },
             },
         },
@@ -185,9 +195,9 @@ local setup_lspconfig = function()
     local common_options = {
         on_attach = on_attach,
         capabilities = capabilities,
-        flags = {
-            debounce_text_changes = 150,
-        },
+        -- flags = {
+        --     debounce_text_changes = 150,
+        -- },
     }
 
     for server, opts in pairs(servers) do

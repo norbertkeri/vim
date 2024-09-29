@@ -1,45 +1,11 @@
 local _ = require("visko.helpers")
 local plugins = {
     {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = {
-            preset = "modern",
-            keys = {
-                scroll_up = "<c-b>",
-                scroll_down = "<c-f>",
-            },
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
-        keys = {
-            {
-                "<leader>?",
-                function()
-                    require("which-key").show({ global = false })
-                end,
-                desc = "Buffer Local Keymaps (which-key)",
-            },
-        },
-    },
-    {
         "lewis6991/gitsigns.nvim",
         opts = {
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
-                local wk = package.loaded["which-key"]
                 local map = require("visko.helpers").vim.create_bufmap(bufnr)
-                wk.add({
-                    {
-                        "<leader>D",
-                        desc = "Diff hunk related movement",
-                        group = "gitsigns",
-                        mode = "n",
-                        buffer = bufnr,
-                    },
-                    { "D", desc = "Diff hunk related movement", group = "gitsigns", mode = "o", buffer = bufnr },
-                })
                 map("n", "<leader>Dj", gs.next_hunk, "Next hunk")
                 map("n", "<leader>Dk", gs.prev_hunk, "Prev hunk")
                 map("o", "Dj", gs.prev_hunk, "Next hunk")

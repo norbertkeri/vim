@@ -51,16 +51,16 @@ local plugins = {
         "MagicDuck/grug-far.nvim",
         config = function()
             local grug = require("grug-far")
-            local opts = { prefills = { flags = "--smart-case" } }
+            local opts = { transient = true, prefills = { flags = "--smart-case", filesFilter = "!*min.*" } }
             grug.setup(opts)
 
             local map = require("visko.helpers").vim.mapkey
 
             map("n", "<leader>F", function()
-                grug.grug_far()
+                grug.open()
             end, "Grug far")
             map("n", "!",
-                function() grug.grug_far({ startInInsertMode = false, prefills = { search = vim.fn.expand("<cword>") } }) end,
+                function() grug.open({ startInInsertMode = false, prefills = { search = vim.fn.expand("<cword>") } }) end,
                 "Grug far current word")
             map("v", "!", function()
                 grug.with_visual_selection({ startInInsertMode = false })

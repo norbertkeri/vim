@@ -75,8 +75,10 @@ local setup_cmp = function()
                 if formatter ~= nil then
                     vim_item = formatter(entry, vim_item)
                 end
+                if completion_kinds[vim_item.kind] ~= nil then
+                    vim_item.kind = (completion_kinds[vim_item.kind][2] or "") .. " "
+                end
 
-                vim_item.kind = (completion_kinds[vim_item.kind][2] or "") .. " "
                 return vim_item
             end,
         },
@@ -102,7 +104,6 @@ local setup_cmp = function()
 
         -- Installed sources
         sources = cmp.config.sources({
-            { name = "crates" },
             {
                 name = "nvim_lsp",
                 entry_filter = function(entry, ctx)

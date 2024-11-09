@@ -139,9 +139,29 @@ local plugins = {
     },
     {
         "saecki/crates.nvim",
-        tag = "v0.3.0",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {},
+        tag = "stable",
+        event = { "BufRead Cargo.toml" },
+        config = function()
+            require("crates").setup({
+                completion = {
+                    crates = {
+                        enabled = true,
+                        max_results = 8,
+                        min_chars = 3
+                    }
+                },
+                lsp = {
+                    enabled = true,
+                    on_attach = function(client, bufnr)
+                        require("visko.lsp_mappings").setup_lsp_keymaps(client, bufnr)
+                        require("visko.lsp_mappings").on_attach(client, bufnr)
+                    end,
+                    actions = true,
+                    completion = true,
+                    hover = true,
+                }
+            })
+        end
     },
     {
         "brenton-leighton/multiple-cursors.nvim",

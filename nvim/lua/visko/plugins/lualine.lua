@@ -15,21 +15,48 @@ local active_lsps = function()
     return table.concat(result, ", ")
 end
 
+local ruler = function()
+    local sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+    local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+    local lines = vim.api.nvim_buf_line_count(0)
+    local i = math.floor((curr_line - 1) / lines * #sbar) + 1
+    return string.rep(sbar[i], 2)
+end
+
 local filename_section = {
     "filename",
-    file_status = true, -- Displays file status (readonly status, modified status)
+    file_status = true,     -- Displays file status (readonly status, modified status)
     newfile_status = false, -- Display new file status (new file means no write after created)
     path = 1,
-    shorting_target = 40, -- Shortens path to leave 40 spaces in the window
+    shorting_target = 40,   -- Shortens path to leave 40 spaces in the window
     -- for other components. (terrible name, any suggestions?)
     symbols = symbols,
 }
 
 local tabs_section = {
     "tabs",
-    mode = 0,
+    mode = 1,
+    path = 0,
     use_mode_colors = true,
     symbols = symbols,
+
+    fmt = function(name, context)
+        local buflist = vim.fn.tabpagebuflist(context.tabnr)
+        local result = {}
+
+        for k, bufid in pairs(buflist) do
+            name = vim.fs.basename(vim.fn.bufname(bufid))
+            if string.len(name) > 0 then
+                table.insert(result, name)
+            end
+        end
+
+        if #result == 0 then
+            return "[No name]"
+        end
+
+        return table.concat(result, " | ")
+    end
 }
 
 local navic_info = {
@@ -40,31 +67,6 @@ local navic_info = {
     cond = function()
         local navic = require("nvim-navic")
         return navic.is_available()
-    end,
-}
-
-local mydiag = {
-    function()
-        local diags = vim.diagnostic.get(nil, { severity = { min = vim.diagnostic.severity.HINT } })
-        local warning = 0
-        local info = 0
-        local hint = 0
-        local error = 0
-        for _, v in ipairs(diags) do
-            if v.severity == vim.diagnostic.severity.HINT then
-                hint = hint + 1
-            elseif v.severity == vim.diagnostic.severity.INFO then
-                info = info + 1
-            elseif v.severity == vim.diagnostic.severity.WARN then
-                warning = warning + 1
-            elseif v.severity == vim.diagnostic.severity.ERROR then
-                error = error + 1
-            end
-        end
-        return string.format("E: %d W: %d I: %d H: %d", error, warning, info, hint)
-    end,
-    cond = function()
-        return true
     end,
 }
 
@@ -114,7 +116,7 @@ return {
                 },
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = { "location" },
+                lualine_y = { "location", ruler },
                 lualine_z = { "progress", project_root },
             },
             winbar = winbar_sections,

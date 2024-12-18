@@ -1,127 +1,20 @@
+local helpers = require('visko.helpers')
+local hide_rust_modules = {
+    "OwoColorize",
+}
+
 local completion_filters = {
-    rust = function(entry, _)
-        local hide = {
-            "color_eyre::owo_colors",
-        }
-        local item = entry:get_completion_item()
-        local import_path = vim.tbl_get(item, "data", "imports", 1, "full_import_path")
-        for _, v in ipairs(hide) do
-            if import_path and string.find(import_path, v) then
-                return false
+    rust = function(items)
+        local result = {}
+        for _, item in ipairs(items) do
+            local import_path = vim.tbl_get(item, "data", "imports", 1, "imported_name")
+            if not helpers.in_table(import_path, hide_rust_modules) then
+                table.insert(result, item)
             end
         end
-        return true
+        return result
     end,
 }
-
-local formatters = {
-    rust = function(entry, vim_item)
-        vim.inspect(vim_item)
-        if vim_item.kind == "Method" or vim_item.kind == "Function" then
-            if vim_item.menu ~= nil then
-                -- Rearrange hints that look like "(use xyz)fn(x, y, z)" to "fn(x, y, z) (use xyz)"
-                local _, _, path, rest = string.find(vim_item.menu, "^ %(%w+ ([%w:]-)%)(.*)$")
-                if path ~= nil then
-                    vim_item.menu = rest .. " (" .. path .. ")"
-                end
-            end
-        end
-        return vim_item
-    end
-}
-
-local completion_kinds = {
-    Text = { 1, "" },
-    Method = { 2, "" },
-    Function = { 3, "" },
-    Constructor = { 4, "" },
-    Field = { 5, "" },
-    Variable = { 6, "" },
-    Class = { 7, "" },
-    Interface = { 8, "" },
-    Module = { 9, "" },
-    Property = { 10, "ﰠ" },
-    Unit = { 11, "" },
-    Value = { 12, "" },
-    Enum = { 13, "" },
-    Keyword = { 14, "" },
-    Snippet = { 15, "" },
-    Color = { 16, "" },
-    File = { 17, "" },
-    Reference = { 18, "" },
-    Folder = { 19, "" },
-    EnumMember = { 20, "" },
-    Constant = { 21, "" },
-    Struct = { 22, "" },
-    Event = { 23, "" },
-    Operator = { 24, "" },
-    TypeParameter = { 25, " " },
-}
-
-local setup_cmp = function()
-    local cmp = require("cmp")
-    local documentation_window = cmp.config.window.bordered()
-    documentation_window.max_height = 60
-
-    cmp.setup({
-        window = {
-            completion = cmp.config.window.bordered(),
-            documentation = documentation_window,
-        },
-        formatting = {
-            fields = { "kind", "abbr", "menu" },
-            format = function(entry, vim_item)
-                local formatter = formatters[vim.bo.filetype]
-                if formatter ~= nil then
-                    vim_item = formatter(entry, vim_item)
-                end
-                if completion_kinds[vim_item.kind] ~= nil then
-                    vim_item.kind = (completion_kinds[vim_item.kind][2] or "") .. " "
-                end
-
-                return vim_item
-            end,
-        },
-        snippet = {
-            expand = function(args)
-                vim.fn["vsnip#anonymous"](args.body)
-            end,
-        },
-        mapping = cmp.mapping.preset.insert({
-            ["<C-p>"] = cmp.mapping.select_prev_item(),
-            ["<C-n>"] = cmp.mapping.select_next_item(),
-            -- Add tab support
-            ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-            ["<Tab>"] = cmp.mapping.select_next_item(),
-            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-            ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-e>"] = cmp.mapping.abort(),
-            ["<CR>"] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
-            }),
-        }),
-
-        -- Installed sources
-        sources = cmp.config.sources({
-            {
-                name = "nvim_lsp",
-                entry_filter = function(entry, ctx)
-                    local filter = completion_filters[vim.bo.filetype]
-                    if filter ~= nil then
-                        return filter(entry, ctx)
-                    end
-                    return true
-                end,
-            },
-            { name = "nvim_lsp_signature_help" },
-            { name = "vsnip" }, -- Not sure I actually use snippets
-        }, {
-            { name = "path" },
-            { name = "buffer", keyword_length = 5 },
-        }),
-    })
-end
 
 local setup_lspconfig = function()
     require("mason").setup()
@@ -132,8 +25,6 @@ local setup_lspconfig = function()
     require("neodev").setup({})
 
     local lspconfig = require("lspconfig")
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     local servers = {
         bashls = {},
@@ -193,6 +84,7 @@ local setup_lspconfig = function()
         require("visko.lsp_mappings").on_attach(client, bufnr)
     end
 
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
     local common_options = {
         on_attach = on_attach,
         capabilities = capabilities,
@@ -214,29 +106,6 @@ local function toggle_lines()
 end
 
 return {
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/vim-vsnip",
-    "hrsh7th/vim-vsnip-integ",
-    {
-        "hrsh7th/cmp-vsnip",
-        config = setup_cmp,
-    },
-    {
-        "ray-x/lsp_signature.nvim",
-        config = function()
-            require("lsp_signature").setup({
-                max_height = 60,
-                max_width = 120,
-                doc_lines = 3,
-                hint_enable = false,
-                hint_prefix = "",
-                extra_trigger_chars = { "(", "," },
-            })
-        end,
-    },
     {
         "neovim/nvim-lspconfig",
         dependencies = { "SmiteshP/nvim-navic", "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
@@ -250,5 +119,124 @@ return {
             lsp_lines.setup()
             vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
         end,
+    },
+
+    {
+        'saghen/blink.cmp',
+        lazy = false, -- lazy loading handled internally
+        -- optional: provides snippets for the snippet source
+        dependencies = 'rafamadriz/friendly-snippets',
+
+        -- use a release tag to download pre-built binaries
+        version = 'v0.*',
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            keymap = {
+                ['<C-n>'] = { 'select_next', 'fallback', },
+                ['<Tab>'] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            return cmp.snippet_forward()
+                        else
+                            return cmp.select_next()
+                        end
+                    end,
+                    'fallback'
+                },
+                ['<S-Tab>'] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            return cmp.snippet_backward()
+                        else
+                            return cmp.select_prev()
+                        end
+                    end,
+                    'fallback'
+                },
+                ['<C-p>'] = { 'select_prev', 'fallback', },
+                ['<C-d>'] = { 'show', 'show_documentation', 'hide_documentation', 'fallback' },
+                ['<cr>'] = { 'select_and_accept', 'fallback', },
+                ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+                ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+            },
+            completion = {
+                ghost_text = { enabled = true },
+                documentation = {
+                    auto_show = true,
+                    update_delay_ms = 10,
+                    window = {
+                        max_width = 80,
+                        max_height = 40,
+                        border = 'rounded',
+                        winblend = 20,
+                    }
+                },
+                menu = {
+                    winblend = 20,
+                    min_width = 25,
+                    max_height = 40,
+                    border = 'rounded',
+                    draw = {
+                        treesitter = { 'lsp' },
+                        columns = { { 'kind_icon', 'label', gap = 1 }, { 'label_description', 'kind', gap = 1 } },
+                        components = {
+                            label = {
+                                text = function(ctx) return ctx.label .. ctx.label_detail end,
+                            },
+
+                            label_description = {
+                                text = function(ctx)
+                                    if vim.bo.filetype ~= "rust" then
+                                        return ctx.label_description
+                                    end
+                                end,
+                            },
+                        }
+                    },
+                },
+            },
+            appearance = {
+                -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+                -- Useful for when your theme doesn't support blink.cmp
+                -- will be removed in a future release
+                use_nvim_cmp_as_default = true,
+                -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+                -- Adjusts spacing to ensure icons are aligned
+                nerd_font_variant = 'mono'
+            },
+
+            signature = {
+                enabled = true,
+                window = {
+                    winblend = 20,
+                    border = 'rounded',
+                }
+            },
+            sources = {
+                providers = {
+                    snippets = {
+                        enabled = false
+                    },
+                    buffer = {
+                        min_keyword_length = 3,
+                    },
+                    lsp = {
+                        transform_items = function(_, items)
+                            if completion_filters[vim.bo.filetype] ~= nil then
+                                return completion_filters[vim.bo.filetype](items)
+                            end
+                            return items
+                        end
+                    }
+                }
+            },
+            fuzzy = {
+                use_typo_resistance = false
+            }
+        },
+        -- allows extending the providers array elsewhere in your config
+        -- without having to redefine it
+        opts_extend = { "sources.default" }
     },
 }

@@ -46,4 +46,13 @@ function M.vim.create_bufmap(bufnr)
     end
 end
 
+function M.in_table(needle, haystack)
+    for _, v in pairs(haystack) do
+        if v == needle then
+            return true
+        end
+    end
+    return false
+end
+
 return M

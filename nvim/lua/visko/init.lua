@@ -17,7 +17,6 @@ require(... .. ".lazy_bootstrap")
 require("lazy").setup("visko.plugins")
 require(... .. ".mappings")
 require(... .. ".lsp")
-require(... .. ".snippets")
 
 Is_colemak = false
 

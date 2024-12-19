@@ -14,7 +14,9 @@ setup_persistent_undo()
 
 require(... .. ".editor")
 require(... .. ".lazy_bootstrap")
-require("lazy").setup("visko.plugins")
+require("lazy").setup("visko.plugins", {
+    change_detection = { enabled = false }
+})
 require(... .. ".mappings")
 require(... .. ".lsp")
 

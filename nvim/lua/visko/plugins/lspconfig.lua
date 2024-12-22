@@ -218,6 +218,7 @@ return {
                     snippets = {
                         enabled = false
                     },
+                    cmdline = { enabled = false },
                     buffer = {
                         min_keyword_length = 3,
                     },

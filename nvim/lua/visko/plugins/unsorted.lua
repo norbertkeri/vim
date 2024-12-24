@@ -174,7 +174,6 @@ local plugins = {
             { "<C-d>",   "<Cmd>MultipleCursorsJumpNextMatch<CR>",    mode = { "n", "x" }, desc = "Jump to next cword" },
         },
     },
-    "folke/neodev.nvim",
     { "echasnovski/mini.ai", opts = {} },
     "mbbill/undotree",
     {
@@ -229,6 +228,18 @@ local plugins = {
             "ibhagwan/fzf-lua"
         },
         config = true
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                "LazyVim",
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
     }
 }
 

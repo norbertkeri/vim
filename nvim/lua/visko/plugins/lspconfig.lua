@@ -22,8 +22,6 @@ local setup_lspconfig = function()
         ensure_installed = { "rust_analyzer", "lua_ls", "jsonls", "bashls" },
     })
 
-    require("neodev").setup({})
-
     local lspconfig = require("lspconfig")
 
     local servers = {
@@ -227,7 +225,14 @@ return {
                 }
             },
             sources = {
+                default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                 providers = {
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
                     snippets = {
                         enabled = false
                     },

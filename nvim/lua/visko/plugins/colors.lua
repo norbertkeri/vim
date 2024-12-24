@@ -13,7 +13,6 @@ local catppuccin = function()
             lsp_saga = false,
             gitgutter = false,
             gitsigns = true,
-            telescope = true,
             nvimtree = {
                 enabled = false,
                 show_root = false,
@@ -46,10 +45,10 @@ return {
     "morhetz/gruvbox",
     "drewtempelmeyer/palenight.vim",
     "folke/tokyonight.nvim",
-    { "catppuccin/nvim", config = catppuccin },
+    { "catppuccin/nvim",            config = catppuccin },
     "devnnys/spaceodyssey.nvim",
     "rebelot/kanagawa.nvim",
-    { "diegoulloao/neofusion.nvim", priority = 1000, config = true, opts = {} },
+    { "diegoulloao/neofusion.nvim", priority = 1000,    config = true, opts = {} },
     {
         "EdenEast/nightfox.nvim",
         config = function()
@@ -63,7 +62,6 @@ return {
                         fidget = true,
                         gitsigns = true,
                         lsp_trouble = true,
-                        telescope = true,
                         treesitter = true,
                         native_lsp = true,
                     },

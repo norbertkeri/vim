@@ -17,7 +17,7 @@ local plugins = {
         "MagicDuck/grug-far.nvim",
         config = function()
             local grug = require("grug-far")
-            local opts = { transient = true, prefills = { flags = "--smart-case", filesFilter = "!*min.*" } }
+            local opts = { transient = true, prefills = { flags = "--smart-case", filesFilter = "!*min.*\n!lazy-lock.json" } }
             grug.setup(opts)
 
             local map = require("visko.helpers").vim.mapkey
@@ -216,8 +216,6 @@ local plugins = {
     {
         "gbprod/yanky.nvim",
         config = function()
-            local actions = require("telescope.actions")
-            local mapping = require("yanky.telescope.mapping")
             local map = require("visko.helpers").vim.mapkey
             require("yanky").setup({
                 ring = {
@@ -231,22 +229,9 @@ local plugins = {
                     on_put = false,
                     on_yank = false,
                 },
-                picker = {
-                    telescope = {
-                        mappings = {
-                            i = {
-                                ["<c-j>"] = actions.move_selection_next,
-                                ["<c-k>"] = actions.move_selection_previous,
-                                ["<c-d>"] = mapping.delete(),
-                                ["<c-p>"] = actions.nop,
-                            },
-                        },
-                    },
-                },
             })
             map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", "Put")
             map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", "Put before")
-            map("n", "<leader>P", ":Telescope yank_history<cr>", "Telescope yank history")
             map("n", "<leader>p", "<Plug>(YankyCycleForward)", "Put next")
             map("n", "<leader>n", "<Plug>(YankyCycleBackward)", "Put prev")
             map({ "n", "x" }, "y", "<Plug>(YankyYank)", "Yank") -- do not go back to the start of the yanked text
@@ -267,22 +252,12 @@ local plugins = {
     {
         "NeogitOrg/neogit",
         dependencies = {
-            "nvim-lua/plenary.nvim",         -- required
-            "sindrets/diffview.nvim",        -- optional - Diff integration
-            "nvim-telescope/telescope.nvim", -- optional
+            "nvim-lua/plenary.nvim",  -- required
+            "sindrets/diffview.nvim", -- optional - Diff integration
+            "ibhagwan/fzf-lua"
         },
         config = true
-    },
-    {
-        "ibhagwan/fzf-lua",
-        -- optional for icon support
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            -- calling `setup` is optional for customization
-            require("fzf-lua").setup({})
-        end
-    },
-
+    }
 }
 
 return plugins

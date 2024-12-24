@@ -1,4 +1,4 @@
-local tsbuiltin = require("telescope.builtin")
+local fzflua = require("fzf-lua")
 
 local M = {}
 
@@ -7,7 +7,7 @@ function M.setup_lsp_keymaps(lspclient, bufnr)
 
     vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-    bufmap("n", "<leader>s", tsbuiltin.lsp_dynamic_workspace_symbols, "Workspace symbols")
+    bufmap("n", "<leader>s", fzflua.lsp_workspace_symbols, "Workspace symbols")
     bufmap("n", "<leader>j", vim.diagnostic.goto_next, "Next diagnostic")
     bufmap("n", "<leader>k", vim.diagnostic.goto_prev, "Prev diagnostic")
 

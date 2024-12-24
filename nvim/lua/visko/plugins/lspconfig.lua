@@ -133,6 +133,16 @@ return {
         ---@type blink.cmp.Config
         opts = {
             keymap = {
+                cmdline = {
+                    ['<cr>'] = {
+                        function(cmp)
+                            -- Enter should accept and execute (instead of just accept)
+                            -- This lets me press enter once to execute a :cmdline command, instead of pressing twice
+                            return cmp.accept({ callback = function() vim.api.nvim_feedkeys('\n', 'n', true) end })
+                        end, "fallback"
+                    },
+                    ['<Tab>'] = { 'select_next' }
+                },
                 ['<C-n>'] = { 'select_next', 'fallback', },
                 ['<Tab>'] = {
                     function(cmp)
@@ -154,13 +164,16 @@ return {
                     end,
                     'fallback'
                 },
-                ['<C-p>'] = { 'select_prev', 'fallback', },
+                ['<C-p>'] = { 'select_prev', 'fallback' },
                 ['<C-d>'] = { 'show', 'show_documentation', 'hide_documentation', 'fallback' },
-                ['<cr>'] = { 'select_and_accept', 'fallback', },
+                ['<cr>'] = { 'accept', 'fallback' },
                 ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
                 ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
             },
             completion = {
+                list = {
+                    selection = "auto_insert",
+                },
                 ghost_text = { enabled = true },
                 documentation = {
                     auto_show = true,
@@ -218,10 +231,7 @@ return {
                     snippets = {
                         enabled = false
                     },
-                    cmdline = { enabled = false },
-                    buffer = {
-                        min_keyword_length = 3,
-                    },
+                    buffer = {},
                     lsp = {
                         transform_items = function(_, items)
                             if completion_filters[vim.bo.filetype] ~= nil then

@@ -74,22 +74,30 @@ local plugins = {
         opts = {}
     },
     {
-        "kylechui/nvim-surround",
+        "echasnovski/mini.surround",
         opts = {
-            keymaps = {
-                insert = "<C-s>",
-                insert_line = "<C-S>",
-                normal = "yS",
-                normal_cur = "ySc",
-                normal_line = "ySl",
-                normal_cur_line = "ySL",
-                visual = "S",
-                visual_line = "gS",
-                delete = "dS",
-                change = "cS",
-                change_line = "<nop>",
+            mappings = {
+                add = 'Sa',            -- Add surrounding in Normal and Visual modes
+                delete = 'Sd',         -- Delete surrounding
+                find = 'Sf',           -- Find surrounding (to the right)
+                find_left = 'SF',      -- Find surrounding (to the left)
+                highlight = 'Sh',      -- Highlight surrounding
+                replace = 'Sr',        -- Replace surrounding
+                update_n_lineS = 'Sn', -- Update `n_lines`
+
+                suffix_last = 'l',     -- Suffix to search with "prev" method
+                suffix_next = 'n',     -- Suffix to search with "next" method
             },
-        },
+
+            -- Number of lines within which surrounding is searched
+            n_lines = 120,
+
+            -- How to search for surrounding (first inside current line, then inside
+            -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
+            -- 'cover_or_nearest', 'next', 'prev', 'nearest'. For more details,
+            -- see `:h MiniSurround.config`.
+            search_method = 'cover_or_next',
+        }
     },
     {
         "folke/flash.nvim",

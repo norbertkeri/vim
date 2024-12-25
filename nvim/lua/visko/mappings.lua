@@ -33,8 +33,6 @@ vim.keymap.set("v", "<s-K>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<s-N>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<s-E>", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-
 -- Kitty supports distinguishing between c-i and tab, so we can map back <c-i> to "jump in"
 vim.keymap.set("n", "<C-i>", "<C-i>")
 

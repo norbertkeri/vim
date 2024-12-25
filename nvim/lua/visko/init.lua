@@ -17,6 +17,7 @@ require(... .. ".lazy_bootstrap")
 require("lazy").setup("visko.plugins", {
     change_detection = { enabled = false }
 })
+require(... .. ".mappings")
 require(... .. ".lsp")
 require(... .. ".hilights")
 

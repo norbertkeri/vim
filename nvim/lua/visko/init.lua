@@ -18,6 +18,7 @@ require("lazy").setup("visko.plugins", {
     change_detection = { enabled = false }
 })
 require(... .. ".lsp")
+require(... .. ".hilights")
 
 Is_colemak = false
 
